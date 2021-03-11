@@ -1,4 +1,4 @@
-export interface Color{
-    Id:number;
-    ColorName:string;
+export interface Color {
+  id: number;
+  colorName: string;
 }
