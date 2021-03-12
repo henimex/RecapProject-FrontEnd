@@ -9,9 +9,15 @@
   <div *ngFor="let car of cars" class="card" style="width: 18rem;" class="carbox">
     <img src="https://i.pinimg.com/originals/66/68/3f/66683f6077249d030646da9ade928991.png" class="card-img-top" alt="Img Alt">
     <div class="card-body">
-      <h5 class="card-title">{{ car.id }}</h5>
-      <p class="card-text">{{ car.description }}</p>
-      <a href="#" class="btn btn-success" >Rent Car </a>
+      <h5 class="card-title">{{ car.brandId }}</h5>
+      <label for="customRange3" class="form-label">Days for Rent</label>
+      <input type="range" class="form-range" min="0" max="30" step="1" default="2" id="rentDate">
+      <label class="form-label" for="customRange1">Example range</label>
+      <div class="range">
+        <input type="range" class="form-range" id="customRange1" />
+      </div>
+      <p class="card-text">Color : {{car.colorId}} <br> Model Year: {{car.modelYear}} <br> {{ car.description }}</p>
+      <a href="#" class="btn btn-success" >Rent {{car.dailyPrice}} TL </a>
       <a href="#" class="btn btn-danger">Return Car</a>
     </div>
   </div>
