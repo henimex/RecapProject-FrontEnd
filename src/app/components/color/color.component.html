@@ -1,1 +1,14 @@
-<p>color works!</p>
+<div class="list-group">
+  <a
+    href="#"
+    class="list-group-item list-group-item-action active"
+    aria-current="true"
+    >Tüm Renkler</a
+  >
+  <a
+    *ngFor="let color of colors"
+    href="#"
+    class="list-group-item list-group-item-action"
+    >{{ color.colorName }}</a
+  >
+</div>

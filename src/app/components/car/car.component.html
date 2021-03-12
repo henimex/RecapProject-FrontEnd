@@ -4,6 +4,19 @@
   <span class="visually-hidden">Yükleniyor...</span>
 </div>
 
+<!-- Car View -->
+<div class="row">
+  <div *ngFor="let car of cars" class="card" style="width: 18rem;" class="carbox">
+    <img src="https://i.pinimg.com/originals/66/68/3f/66683f6077249d030646da9ade928991.png" class="card-img-top" alt="Img Alt">
+    <div class="card-body">
+      <h5 class="card-title">{{ car.id }}</h5>
+      <p class="card-text">{{ car.description }}</p>
+      <a href="#" class="btn btn-success" >Rent Car </a>
+      <a href="#" class="btn btn-danger">Return Car</a>
+    </div>
+  </div>
+</div>
+
 <!-- Data Table -->
 <table *ngIf="dataLoaded == true" class="table table-striped">
   <thead>

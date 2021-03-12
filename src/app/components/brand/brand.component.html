@@ -1,7 +1,23 @@
-<div  class="list-group">
-    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">Tüm Markalar</a>
-    <a *ngFor="let brand of brands" href="#" class="list-group-item list-group-item-action">{{brand.brandName}}</a>
-    <a href="#" class="list-group-item list-group-item-action">Fazladan Link 1</a>
-    <a href="#" class="list-group-item list-group-item-action">Custom Link 2</a>
-    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Disabled Lazım Olur</a>
-  </div>
+<div class="list-group">
+  <a
+    href="#"
+    class="list-group-item list-group-item-action active"
+    aria-current="true"
+    >Tüm Markalar</a
+  >
+  <a
+    *ngFor="let brand of brands"
+    href="#"
+    class="list-group-item list-group-item-action"
+    >{{ brand.brandName }}</a
+  >
+  <a href="#" class="list-group-item list-group-item-action">Fazladan Link 1</a>
+  <a href="#" class="list-group-item list-group-item-action">Custom Link 2</a>
+  <a
+    href="#"
+    class="list-group-item list-group-item-action disabled"
+    tabindex="-1"
+    aria-disabled="true"
+    >Disabled Lazım Olur</a
+  >
+</div>

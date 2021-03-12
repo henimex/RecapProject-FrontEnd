@@ -1,0 +1,14 @@
+.carbox{
+    padding: 5px;
+}
+img{
+    width: 250px;
+    height: 250px;
+    object-fit: scale-down;
+}
+a{
+    margin: 5px;
+}
+.carbutton{
+    padding: 5px;
+}
