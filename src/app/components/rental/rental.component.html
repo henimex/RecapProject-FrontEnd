@@ -23,4 +23,31 @@
     <td>{{ rental.rentDate }}</td>
     <td>{{ rental.returnDate }}</td>
   </tr>
+
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>CarId</th>
+      <th>Brand Name</th>
+      <th>Customer Name</th>
+      <th>Mail</th>
+      <th>Company</th>
+      <th>Daily Price</th>
+      <th>Rent Date</th>
+      <th>Return Date</th>
+    </tr>
+  </thead>
+
+  <tr *ngFor="let rd of rentalDetails"  >
+    <td>{{ rd.id }}</td>
+    <td>{{ rd.carId }}</td>
+    <td>{{ rd.brandName }}</td>
+    <td>{{ rd.customerName }} {{ rd.customerSurname }}</td>
+    <td>{{ rd.customerMail }}</td>
+    <td>{{ rd.company }}</td>
+    <td>{{ rd.dailyPrice | currency:'TRY':'₺ ':'1.2-2'}}</td>
+    <!-- <td>{{ rd.dailyPrice | number:'1.2-2'}}</td> -->
+    <td>{{ rd.rentDate | date:'dd.MM.yyyy'}} </td>
+    <td>{{ rd.returnDate |date:'dd.MM.yyyy' }}</td>
+  </tr>
 </table>

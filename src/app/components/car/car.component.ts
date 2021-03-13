@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
-import { BrandService } from 'src/app/services/brand.service';
+import { CarImage } from 'src/app/models/carImage';
+import { CarDetailsDto } from 'src/app/models/Dto/carDetailDto';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -10,35 +11,41 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
-  //#region ManuelData
-  
-  //#endregion
-
   cars: Car[] = [];
-  brands: Brand[] = [];
+  carDetails: CarDetailsDto[] = [];
+  carImages: CarImage[] = [];
+
   dataLoaded = false;
   constructor(
-    private carService: CarService, 
-    private brandService: BrandService) {}
+    private carService: CarService,
+    private carImageService: CarImageService
+  ) {}
 
   ngOnInit(): void {
     this.getCars();
-    this.getBrands();
+    this.getCarDetails();
+    this.getImagesById(1)
   }
 
   getCars() {
     this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
-      console.log(response.message)
-      console.log(response.data)
+      console.log('getCars Response Success: ' + response.success);
       this.dataLoaded = true;
     });
   }
 
-  getBrands(){
-    this.brandService.getBrands().subscribe(response=>{
-      this.brands = response.data
+  getCarDetails() {
+    this.carService.getCarDetails().subscribe((response) => {
+      this.carDetails = response.data;
+      console.log('getCarDetails Response Success: ' + response.success);
+    });
+  }
+
+  getImagesById(carId: number) {
+    this.carImageService.getCarImageByCarId(carId).subscribe((response) => {
+      this.carImages = response.data;
       console.log(response.data)
-    })
+    });
   }
 }

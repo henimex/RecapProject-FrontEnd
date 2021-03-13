@@ -4,6 +4,8 @@
   <span class="visually-hidden">Yükleniyor...</span>
 </div>
 
+<!-- https://cdn.pixabay.com/photo/2015/06/24/22/25/beetle-820774__340.png -->
+<!-- "http://localhost:4200/assets/test.jpg" -->
 <!-- Car View -->
 <div class="row">
   <div *ngFor="let car of cars" class="card" style="width: 18rem;" class="carbox">
@@ -40,4 +42,31 @@
     <td>{{ car.dailyPrice }}</td>
     <td>{{ car.description }}</td>
   </tr>
+
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Brand Name</th>
+      <th>Color Name</th>
+      <th>Model Year</th>
+      <th>Daily Price</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tr *ngFor="let cd of carDetails"  >
+    <td>{{ cd.carId }}</td>
+    <td>{{ cd.brandName }}</td>
+    <td>{{ cd.colorName }}</td>
+    <td>{{ cd.modelYear }}</td>
+    <td>{{ cd.dailyPrice }}</td>
+    <td>{{ cd.description }}</td>
+  </tr>
 </table>
+
+<div >Images for Car ID=1
+  <ul *ngFor="let image of carImages">
+    <li >{{image.imagePath}}</li>
+  </ul>
+</div>
+

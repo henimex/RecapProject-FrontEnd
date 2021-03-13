@@ -1,6 +1,6 @@
 import { CarDetailsDto } from '../Dto/carDetailDto';
 import { ResponseModelBase } from './responseModelBase';
 
-export interface CarDetailsRM extends ResponseModelBase {
+export interface CarDetailsDtoRM extends ResponseModelBase {
   data: CarDetailsDto[];
 }
