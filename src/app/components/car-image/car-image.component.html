@@ -1,1 +1,22 @@
-<p>car-image works!</p>
+<table *ngIf="dataLoaded == true" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>carId</th>
+      <th>imagePath</th>
+      <th>date</th>
+    </tr>
+  </thead>
+
+  <tr *ngFor="let image of carImages">
+    <td>{{ image.id }}</td>
+    <td>{{ image.carId }}</td>
+    <td>{{ image.imagePath }}</td>
+    <td>{{ image.date }}</td>
+  </tr>
+</table>
+
+<div *ngIf="dataLoaded == false">
+  <H3>There are no Images of This Car. </H3>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png" alt="NoImageAvailable">
+</div>

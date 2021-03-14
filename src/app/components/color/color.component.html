@@ -1,14 +1,15 @@
 <div class="list-group">
-  <a
-    href="#"
-    class="list-group-item list-group-item-action active"
-    aria-current="true"
+  <a class="list-group-item list-group-item-action active" aria-current="true"
     >Tüm Renkler</a
   >
   <a
+    (click)="setCurrentColor(color)"
+    routerLink="/cars/color/{{color.id}}"
     *ngFor="let color of colors"
-    href="#"
     class="list-group-item list-group-item-action"
     >{{ color.colorName }}</a
+  >
+  <H3 *ngIf="currentColor">
+    selected color : {{ currentColor.colorName }} {{ currentColor.id }}</H3
   >
 </div>

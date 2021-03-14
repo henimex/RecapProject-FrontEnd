@@ -1,6 +1,9 @@
 <!-- Spinner -->
 <div
-  *ngIf="dataLoaded == false" class="spinner-border text-warning" role="status">
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-warning"
+  role="status"
+>
   <span class="visually-hidden">Yükleniyor...</span>
 </div>
 
@@ -8,41 +11,39 @@
 <!-- "http://localhost:4200/assets/test.jpg" -->
 <!-- Car View -->
 <div class="row">
-  <div *ngFor="let car of cars" class="card" style="width: 18rem;" class="carbox">
-    <img src="https://cdn.pixabay.com/photo/2015/06/24/22/25/beetle-820774__340.png" class="card-img-top" alt="Img Alt">
+  <div
+    *ngFor="let carDto of carDetails"
+    class="card"
+    style="width: 18rem"
+    class="carbox"
+  >
+    <img
+      src="https://cdn.pixabay.com/photo/2015/06/24/22/25/beetle-820774__340.png"
+      class="card-img-top"
+      alt="Img Alt"
+    />
     <div class="card-body">
-      <h5 class="card-title">{{ car.brandId }}</h5>
-      <label for="customRange3" class="form-label">Days for Rent</label>
-      <input type="range" class="form-range" min="0" max="30" step="1" default="2" id="rentDate">
-      <p class="card-text">Color : {{car.colorId}} <br> Model Year : {{car.modelYear}} <br> {{ car.description }}</p>
-      <a href="#" class="btn btn-success" >Rent {{car.dailyPrice}} TL </a>
-      <a href="#" class="btn btn-danger">Return Car</a>
+      <h5
+        (click)="setCurrentCar(carDto)"
+        routerLink="/images/car/{{carDto.carId}}"
+        class="card-title"
+      >
+        {{ carDto.brandName }}
+      </h5>
+      <p class="card-text">
+        Color : {{ carDto.colorName }} <br />
+        Model Year : {{ carDto.modelYear }} <br />
+        Description : {{ carDto.description }}
+      </p>
+      <a class="btn btn-success">Rent {{ carDto.dailyPrice }} TL </a>
+      <a class="btn btn-danger">Return Car</a>
+      <h5 *ngIf="currentCar">Seçtiniz. {{currentCar.carId}}</h5>
     </div>
   </div>
 </div>
 
 <!-- Data Table -->
 <table *ngIf="dataLoaded == true" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>BrandId</th>
-      <th>ColorId</th>
-      <th>Model Year</th>
-      <th>Daily Price</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-
-  <tr *ngFor="let car of cars"  >
-    <td>{{ car.id }}</td>
-    <td>{{ car.brandId }}</td>
-    <td>{{ car.colorId }}</td>
-    <td>{{ car.modelYear }}</td>
-    <td>{{ car.dailyPrice }}</td>
-    <td>{{ car.description }}</td>
-  </tr>
-
   <thead>
     <tr>
       <th>Id</th>
@@ -54,19 +55,19 @@
     </tr>
   </thead>
 
-  <tr *ngFor="let cd of carDetails"  >
-    <td>{{ cd.carId }}</td>
-    <td>{{ cd.brandName }}</td>
-    <td>{{ cd.colorName }}</td>
-    <td>{{ cd.modelYear }}</td>
-    <td>{{ cd.dailyPrice }}</td>
-    <td>{{ cd.description }}</td>
+  <tr *ngFor="let carDto of carDetails">
+    <td>{{ carDto.carId }}</td>
+    <td>{{ carDto.brandName }}</td>
+    <td>{{ carDto.colorName }}</td>
+    <td>{{ carDto.modelYear }}</td>
+    <td>{{ carDto.dailyPrice }}</td>
+    <td>{{ carDto.description }}</td>
   </tr>
 </table>
 
-<div >Images for Car ID=1
+<div>
+  Images for Car ID=1
   <ul *ngFor="let image of carImages">
-    <li >{{image.imagePath}}</li>
+    <li>{{ image.imagePath }}</li>
   </ul>
 </div>
-
