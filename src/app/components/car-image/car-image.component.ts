@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarImage } from 'src/app/models/carImage';
 import { CarImageService } from 'src/app/services/car-image.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-car-image',
@@ -13,10 +14,13 @@ export class CarImageComponent implements OnInit {
   carImages: CarImage[];
   dataLoaded = false;
   defaultImgPath:string;
+  selectedFile:File;
+  currentCarId:CarImage;
 
   constructor(
     private carImageService: CarImageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +50,22 @@ export class CarImageComponent implements OnInit {
         console.log("Yesss")
       }
     });
+  }
+
+  setCurrentImage(image:CarImage) {
+    //this.currentImage = image;
+  }
+
+  onFileSelected(event:any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  onUpload(){
+    const formData = new FormData();
+    formData.append('image',this.selectedFile,this.selectedFile.name)
+    formData.append('carId','4')
+    this.httpClient.post('https://localhost:44327/api/carImages/add',formData).subscribe(response => {
+      console.log(response)
+    })
   }
 }

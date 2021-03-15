@@ -21,4 +21,12 @@ export class CarImageService {
     let newPath = this.apiUrl + 'carimages/get-by-car-id?carId=' + carId;
     return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
   }
+
+  // uploadCarImage(selectedFile:File): Observable<ListResponseModel<CarImage>>{
+  //   const formData = new FormData();
+  //   let newPath = this.apiUrl + 'carimages/add';
+
+  //   formData.append('image',selectedFile,selectedFile.name)
+  //   this.httpClient.post(newPath,formData);
+  //}
 }
