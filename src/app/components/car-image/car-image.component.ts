@@ -15,7 +15,7 @@ export class CarImageComponent implements OnInit {
   dataLoaded = false;
   defaultImgPath:string;
   selectedFile:File;
-  currentCarId:CarImage;
+  currentCarId:string;
 
   constructor(
     private carImageService: CarImageService,
@@ -27,6 +27,7 @@ export class CarImageComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getImagesByCarId(params['carId']);
+        this.currentCarId = params['carId']
       } else {
         console.log('New Method Should be Iplemented');
         this.getImages();
@@ -36,7 +37,23 @@ export class CarImageComponent implements OnInit {
 
   getImages() {
     this.carImageService.getCarImages().subscribe((response) => {
+      let rep = "E:\\Apps\\Angular\\RecapProject-FrontEnd\\src"
+      for (let index = 0; index < response.data.length; index++) {
+        const element = response.data[index];
+        element.imagePath.replace(rep,".")
+      }
       this.carImages = response.data;
+
+      response.data.forEach((image) => {
+        console.log(image.imagePath)
+        console.log("edited"+image.imagePath.replace(rep,"."))
+        image.imagePath.replace(rep,".")
+
+
+      });
+
+      this.carImages = response.data;
+      
       this.dataLoaded = true;
     });
   }
@@ -63,9 +80,22 @@ export class CarImageComponent implements OnInit {
   onUpload(){
     const formData = new FormData();
     formData.append('image',this.selectedFile,this.selectedFile.name)
-    formData.append('carId','4')
+    formData.append('carId',this.currentCarId)
     this.httpClient.post('https://localhost:44327/api/carImages/add',formData).subscribe(response => {
       console.log(response)
     })
   }
+
+  UpbloadImage(){
+    this.carImageService.uploadCarImage2(this.currentCarId,this.selectedFile) 
+  }
+
+  // onUpload(){
+  //   const formData = new FormData();
+  //   formData.append('image',this.selectedFile,this.selectedFile.name)
+  //   formData.append('carId',this.currentCarId)
+  //   this.httpClient.post('https://localhost:44327/api/carImages/add',formData).subscribe(response => {
+  //     console.log(response)
+  //   })
+  // }
 }
