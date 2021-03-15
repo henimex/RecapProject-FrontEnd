@@ -22,6 +22,12 @@
   <h5>Default Patrh {{defaultImgPath}}</h5>
 </div>
 
+<div *ngFor="let image of carImages">
+  <img src="{{image.imagePath}}" alt="">
+</div>
+
+<img src=".\assets\CarImages\760ce9a1143d45398c2e5c032b841142.jpg" alt="">
+
 <div>
   <h1>Image Upload</h1>
   <input type="file" (change)="onFileSelected($event)">
