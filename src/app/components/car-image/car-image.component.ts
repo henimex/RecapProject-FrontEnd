@@ -12,6 +12,8 @@ export class CarImageComponent implements OnInit {
   images: CarImage[];
   carImages: CarImage[];
   dataLoaded = false;
+  defaultImgPath:string;
+
   constructor(
     private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute
@@ -23,13 +25,14 @@ export class CarImageComponent implements OnInit {
         this.getImagesByCarId(params['carId']);
       } else {
         console.log('New Method Should be Iplemented');
+        this.getImages();
       }
     });
   }
 
   getImages() {
     this.carImageService.getCarImages().subscribe((response) => {
-      this.images = response.data;
+      this.carImages = response.data;
       this.dataLoaded = true;
     });
   }
@@ -37,11 +40,11 @@ export class CarImageComponent implements OnInit {
   getImagesByCarId(carId: number) {
     this.carImageService.getCarImageByCarId(carId).subscribe((response) => {
       this.carImages = response.data;
-      if (this.carImages.length > 0) {
-        this.dataLoaded = true;
+      this.dataLoaded = true;
+      if (this.carImages[0].carId==0) {
+        this.defaultImgPath=this.carImages[0].imagePath;
+        console.log("Yesss")
       }
-      
-      console.log(this.carImages.length)
     });
   }
 }

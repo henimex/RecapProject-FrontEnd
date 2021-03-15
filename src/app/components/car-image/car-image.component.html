@@ -16,7 +16,8 @@
   </tr>
 </table>
 
-<div *ngIf="dataLoaded == false">
+<div *ngIf="defaultImgPath">
   <H3>There are no Images of This Car. </H3>
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png" alt="NoImageAvailable">
+  <h5>Default Patrh {{defaultImgPath}}</h5>
 </div>
