@@ -13,10 +13,11 @@ export class CarImageComponent implements OnInit {
   images: CarImage[];
   carImages: CarImage[];
   dataLoaded = false;
-  defaultImgPath:string;
-  selectedFile:File;
-  currentCarId:string;
+  defaultImgPath: string;
+  selectedFile: File;
+  currentCarId: string;
 
+  
   constructor(
     private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute,
@@ -24,10 +25,17 @@ export class CarImageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    let image1 = {  
+      id: 1,
+      carId: 2,
+      imagePath: ".\\Assets\\CarImages\\cd821de38bf9498992fa5cd9d1b56002.jpg",
+      date: '2021-03-15 13:47:27.367'}
+  
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getImagesByCarId(params['carId']);
-        this.currentCarId = params['carId']
+        this.currentCarId = params['carId'];
       } else {
         console.log('New Method Should be Iplemented');
         this.getImages();
@@ -37,57 +45,66 @@ export class CarImageComponent implements OnInit {
 
   getImages() {
     this.carImageService.getCarImages().subscribe((response) => {
-      let rep = "E:\\Apps\\Angular\\RecapProject-FrontEnd\\src"
-      for (let index = 0; index < response.data.length; index++) {
-        const element = response.data[index];
-        element.imagePath.replace(rep,".")
-      }
       this.carImages = response.data;
-
-      response.data.forEach((image) => {
-        console.log(image.imagePath)
-        console.log("edited"+image.imagePath.replace(rep,"."))
-        image.imagePath.replace(rep,".")
-
-
-      });
-
-      this.carImages = response.data;
-      
       this.dataLoaded = true;
+
+      // response.data.forEach(x => {
+      //   x.imagePath = x.map(x.imagePath.replace(rep,"."))
+      //   console.log(response.data)
+      // });
+      // this.carImages = response.data;
+      // this.dataLoaded = true;
+
+      //console.log("son"+response.data)
+
+      // for (let index = 0; index < response.data.length; index++) {
+      //   const element = response.data[index];
+      //   element.imagePath.replace(rep,".")
+      // }
+
+      // response.data.forEach((image) => {
+      //   console.log(image.imagePath)
+      //   console.log("edited"+image.imagePath.replace(rep,"."))
+      //   image.imagePath.replace(rep,".")
+      // });
+
+      // this.carImages = response.data;
     });
+    let rep = 'E:\\Apps\\Angular\\RecapProject-FrontEnd\\src';
   }
 
   getImagesByCarId(carId: number) {
     this.carImageService.getCarImageByCarId(carId).subscribe((response) => {
       this.carImages = response.data;
       this.dataLoaded = true;
-      if (this.carImages[0].carId==0) {
-        this.defaultImgPath=this.carImages[0].imagePath;
-        console.log("Yesss")
+      if (this.carImages[0].carId == 0) {
+        this.defaultImgPath = this.carImages[0].imagePath;
+        console.log('Yesss');
       }
     });
   }
 
-  setCurrentImage(image:CarImage) {
+  setCurrentImage(image: CarImage) {
     //this.currentImage = image;
   }
 
-  onFileSelected(event:any) {
+  onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
   }
 
-  onUpload(){
+  onUpload() {
     const formData = new FormData();
-    formData.append('image',this.selectedFile,this.selectedFile.name)
-    formData.append('carId',this.currentCarId)
-    this.httpClient.post('https://localhost:44327/api/carImages/add',formData).subscribe(response => {
-      console.log(response)
-    })
+    formData.append('image', this.selectedFile, this.selectedFile.name);
+    formData.append('carId', this.currentCarId);
+    this.httpClient
+      .post('https://localhost:44327/api/carImages/add', formData)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
-  UpbloadImage(){
-    this.carImageService.uploadCarImage2(this.currentCarId,this.selectedFile) 
+  UpbloadImage() {
+    this.carImageService.uploadCarImage2(this.currentCarId, this.selectedFile);
   }
 
   // onUpload(){
