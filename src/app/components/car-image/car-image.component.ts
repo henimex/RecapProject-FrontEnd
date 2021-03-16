@@ -47,6 +47,9 @@ export class CarImageComponent implements OnInit {
     this.carImageService.getCarImages().subscribe((response) => {
       this.carImages = response.data;
       this.dataLoaded = true;
+      
+      //let rep = 'E:\\Apps\\Angular\\RecapProject-FrontEnd\\src';
+      //this.carImages = response.data.map(imagePath => imagePath.replace(rep, '.').replace('\\', '/'));
 
       // response.data.forEach(x => {
       //   x.imagePath = x.map(x.imagePath.replace(rep,"."))
@@ -70,7 +73,7 @@ export class CarImageComponent implements OnInit {
 
       // this.carImages = response.data;
     });
-    let rep = 'E:\\Apps\\Angular\\RecapProject-FrontEnd\\src';
+    
   }
 
   getImagesByCarId(carId: number) {
