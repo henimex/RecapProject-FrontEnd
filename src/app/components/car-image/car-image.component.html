@@ -18,18 +18,62 @@
 
 <div *ngIf="defaultImgPath">
   <H3>There are no Images of This Car. </H3>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png" alt="NoImageAvailable">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png" alt="NoImageAvailable" >
   <h5>Default Patrh {{defaultImgPath}}</h5>
 </div>
 
 <div *ngFor="let image of carImages">
-  <img src="{{image.imagePath}}" alt="">
+  <img src="{{image.imagePath}}" width="500" height="400" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png">
+  <h3>Galery Try</h3>
+  <img src="{{image.imagePath}}" class="img-fluid" alt="...">
+  <h3>Galery Try 2</h3>
+  ​<picture>
+    <source srcset="{{carImages}}" type="image/svg+xml">
+    <img src="..." class="img-fluid img-thumbnail" alt="...">
+  </picture>
+
+  <!-- carousel try -->
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" *ngFor="let image of carImages">
+      <div class="carousel-item active">
+        <img src="{{image.imagePath}}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- carousel try -->
+
+
 </div>
+
+
 
 <!-- <img src="./assets/test.jpg" alt=""> -->
 
 <div>
-  <h1>Image Upload</h1>
-  <input type="file" (change)="onFileSelected($event)">
-  <button type="button" (click)="onUpload()">Upload</button>
+  <h3>Image Upload</h3>
+  <!-- <input  type="file" (change)="onFileSelected($event)">
+  <button type="button" class="btn btn-dark" (click)="onUpload() ">Upload</button>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">></span>
+    <input type="file" (change)="onFileSelected($event)" class="form-control" placeholder="Username" aria-label="Filename" aria-describedby="basic-addon1">
+  </div>
+</div> -->
+
+<div class="input-group">
+  <input type="file" (change)="onFileSelected($event)" class="form-control" id="filePath" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+  <button *ngIf="fileSelected" class="btn btn-dark" type="button" id="inputGroupFileAddon04" (click)="onUpload()">Upload Image</button>
 </div>

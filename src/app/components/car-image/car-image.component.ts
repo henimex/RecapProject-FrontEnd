@@ -16,8 +16,8 @@ export class CarImageComponent implements OnInit {
   defaultImgPath: string;
   selectedFile: File;
   currentCarId: string;
+  fileSelected: boolean = false;
 
-  
   constructor(
     private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute,
@@ -25,13 +25,6 @@ export class CarImageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    let image1 = {  
-      id: 1,
-      carId: 2,
-      imagePath: ".\\Assets\\CarImages\\cd821de38bf9498992fa5cd9d1b56002.jpg",
-      date: '2021-03-15 13:47:27.367'}
-  
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getImagesByCarId(params['carId']);
@@ -47,33 +40,7 @@ export class CarImageComponent implements OnInit {
     this.carImageService.getCarImages().subscribe((response) => {
       this.carImages = response.data;
       this.dataLoaded = true;
-      
-      //let rep = 'E:\\Apps\\Angular\\RecapProject-FrontEnd\\src';
-      //this.carImages = response.data.map(imagePath => imagePath.replace(rep, '.').replace('\\', '/'));
-
-      // response.data.forEach(x => {
-      //   x.imagePath = x.map(x.imagePath.replace(rep,"."))
-      //   console.log(response.data)
-      // });
-      // this.carImages = response.data;
-      // this.dataLoaded = true;
-
-      //console.log("son"+response.data)
-
-      // for (let index = 0; index < response.data.length; index++) {
-      //   const element = response.data[index];
-      //   element.imagePath.replace(rep,".")
-      // }
-
-      // response.data.forEach((image) => {
-      //   console.log(image.imagePath)
-      //   console.log("edited"+image.imagePath.replace(rep,"."))
-      //   image.imagePath.replace(rep,".")
-      // });
-
-      // this.carImages = response.data;
     });
-    
   }
 
   getImagesByCarId(carId: number) {
@@ -93,6 +60,7 @@ export class CarImageComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
+    this.fileSelected = true;
   }
 
   onUpload() {
