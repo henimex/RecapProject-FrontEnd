@@ -24,6 +24,10 @@ export class BrandComponent implements OnInit {
     });
   }
 
+  clearFilter() {
+    this.currentBrand = { id: 0, brandName: '' };
+  }
+
   setCurrentBrand(brand: Brand) {
     this.currentBrand = brand;
   }

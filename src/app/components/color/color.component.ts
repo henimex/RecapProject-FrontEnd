@@ -17,6 +17,10 @@ export class ColorComponent implements OnInit {
     this.getColors();
   }
 
+  clearFilter(){
+    this.currentColor = {id:0,colorName:""}
+  }
+
   getColors() {
     this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;

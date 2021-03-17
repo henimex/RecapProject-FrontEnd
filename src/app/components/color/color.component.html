@@ -1,6 +1,6 @@
 <div class="list-group">
   <a class="list-group-item list-group-item-action active" aria-current="true"
-    >Tüm Renkler</a
+    ></a
   >
   <a
     (click)="setCurrentColor(color)"
@@ -9,17 +9,8 @@
     class="list-group-item list-group-item-action"
     >{{ color.colorName }}</a
   >
-  <H3 *ngIf="currentColor">
-    selected color : {{ currentColor.colorName }} {{ currentColor.id }}</H3
-  >
+  <!-- <H3 *ngIf="currentColor">selected color : {{ currentColor.colorName }} {{ currentColor.id }}</H3> -->
 </div>
+<p></p>
+<a *ngIf="currentColor" (click)="clearFilter()" class="list-group-item list-group-item-action" routerLink="">Clear Filter</a>
 
-<!-- <div class="row">
-<label for="exampleColorInput" class="form-label">Color Filter</label>
-<input type="color" class="form-control form-control-color" id="exampleColorInput" value="#f8f9fa" title="White">
-<input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Black">
-<input type="color" class="form-control form-control-color" id="exampleColorInput" value="#dc3545" title="Red">
-<input type="color" class="form-control form-control-color" id="exampleColorInput" value="#0dcaf0" title="Blue">
-<input type="color" class="form-control form-control-color" id="exampleColorInput" value="#6c757d" title="Silver">
-<input type="color" class="form-control form-control-color" id="exampleColorInput" value="#ffc107" title="Yellow">
-</div> -->
