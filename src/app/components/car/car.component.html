@@ -7,9 +7,7 @@
   <span class="visually-hidden">Yükleniyor...</span>
 </div>
 
-<!-- https://cdn.pixabay.com/photo/2015/06/24/22/25/beetle-820774__340.png -->
-<!-- "http://localhost:4200/assets/test.jpg" -->
-<!-- Car View -->
+<!-- Card View -->
 <div class="row">
   <div
     *ngFor="let carDto of carDetails"
@@ -17,15 +15,11 @@
     style="width: 18rem"
     class="carbox"
   >
-    <img
-      src="https://cdn.pixabay.com/photo/2015/06/24/22/25/beetle-820774__340.png"
-      class="card-img-top"
-      alt="Img Alt"
-    />
+    <img src="{{ carDto.imagePath }}" class="card-img-top" alt="Img Alt" />
     <div class="card-body">
       <h5
         (click)="setCurrentCar(carDto)"
-        routerLink="/images/car/{{carDto.carId}}"
+        routerLink="/images/car/{{ carDto.carId }}"
         class="card-title"
       >
         {{ carDto.brandName }}
@@ -37,7 +31,7 @@
       </p>
       <a class="btn btn-success">Rent {{ carDto.dailyPrice }} TL </a>
       <a class="btn btn-danger">Return Car</a>
-      <h5 *ngIf="currentCar">Seçtiniz. {{currentCar.carId}}</h5>
+      <h5 *ngIf="currentCar">Seçtiniz. {{ currentCar.carId }}</h5>
     </div>
   </div>
 </div>
@@ -64,10 +58,3 @@
     <td>{{ carDto.description }}</td>
   </tr>
 </table>
-
-<div>
-  Images for Car ID=1
-  <ul *ngFor="let image of carImages">
-    <li>{{ image.imagePath }}</li>
-  </ul>
-</div>

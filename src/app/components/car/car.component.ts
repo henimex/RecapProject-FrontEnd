@@ -15,7 +15,9 @@ export class CarComponent implements OnInit {
   cars: Car[];
   carDetails: CarDetailsDto[];
   carImages: CarImage[];
+  currentCarImages: CarImage[];
   currentCar: CarDetailsDto;
+  imagePath: string;
 
   dataLoaded = false;
   constructor(
@@ -47,13 +49,24 @@ export class CarComponent implements OnInit {
     this.carService.getCarDetails().subscribe((response) => {
       this.carDetails = response.data;
       this.dataLoaded = true;
+      this.carClipartImage(this.carDetails)
     });
+  }
+
+  carClipartImage(carDetail:CarDetailsDto[]){
+    carDetail.forEach(car => {
+      this.carImageService.getCarImageByCarId(car.carId).subscribe(response => {
+        car.imagePath = response.data[0].imagePath
+      })
+    });
+    console.log("Thank you to KOD YAZARIM")
   }
 
   getCarDetailsByBrand(brandId: number) {
     this.carService.getCarDetailsByBrand(brandId).subscribe((response) => {
       this.carDetails = response.data;
       this.dataLoaded = true;
+      this.carClipartImage(this.carDetails)
     });
   }
 
@@ -61,6 +74,7 @@ export class CarComponent implements OnInit {
     this.carService.getCarDetailsByColor(colorId).subscribe((response) => {
       this.carDetails = response.data;
       this.dataLoaded = true;
+      this.carClipartImage(this.carDetails)
     });
   }
 
@@ -68,10 +82,12 @@ export class CarComponent implements OnInit {
     this.carImageService.getCarImageByCarId(carId).subscribe((response) => {
       this.carImages = response.data;
       this.dataLoaded = true;
+      this.imagePath = this.carImages[0].imagePath
+      console.log(this.imagePath)
     });
   }
 
-  setCurrentCar(carDto:CarDetailsDto){
+  setCurrentCar(carDto: CarDetailsDto) {
     this.currentCar = carDto;
   }
 }
