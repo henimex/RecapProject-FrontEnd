@@ -1,79 +1,80 @@
-<table *ngIf="dataLoaded == true" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>carId</th>
-      <th>imagePath</th>
-      <th>date</th>
-    </tr>
-  </thead>
 
-  <tr *ngFor="let image of carImages">
-    <td>{{ image.id }}</td>
-    <td>{{ image.carId }}</td>
-    <td>{{ image.imagePath }}</td>
-    <td>{{ image.date }}</td>
-  </tr>
-</table>
+<main class="container" *ngFor="let carDto of carDetails">
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div class="card mb-4 shadow p-3"> 
+      <h1 class="display-4">About {{carDto.modelYear}} {{carDto.brandName}}</h1>
+      <p class="lead">{{ carDto.description }}</p>
+      <p class="lead">Create your Rent Request and wait for a short time. Your application will be approved and the car delivery process will start immediately</p>
+    </div>
+    
+  </div>
 
-<div *ngIf="defaultImgPath">
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 shadow p-3">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">Suggested</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{carDto.dailyPrice}} TL<small class="text-muted"> / dl</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Brand : {{ carDto.brandName }}</li>
+          <li>Color : {{ carDto.colorName }}</li>
+          <li>Model : {{ carDto.modelYear }}</li>
+        </ul>
+        <button type="button" class="w-100 btn btn-dark">Create Rent Request</button>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 shadow p-3">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">Traveller</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">%5 disc<small class="text-muted"> / mo</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Brand : {{ carDto.brandName }}</li>
+          <li>Color : {{ carDto.colorName }}</li>
+          <li>Model : {{ carDto.modelYear }}</li>
+        </ul>
+        <button type="button" class="w-100 btn btn-warning">Contact Us</button>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 shadow p-3">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">Voyager</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">%10 disc<small class="text-muted"> / yr</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Brand : {{ carDto.brandName }}</li>
+          <li>Color : {{ carDto.colorName }}</li>
+          <li>Model : {{ carDto.modelYear }}</li>
+        </ul>
+        <button type="button" class="w-100 btn btn-warning">Contact Us</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="card mb-4 shadow p-3"> 
+    <ng-image-slider [images]="imageObject" [imageSize]="{width: 450, height: 300, space: 4}" #nav></ng-image-slider>
+  </div>
+
+
+<!-- <div *ngIf="defaultImgPath">
   <H3>There are no Images of This Car. </H3>
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png" alt="NoImageAvailable" >
   <h5>Default Patrh {{defaultImgPath}}</h5>
-</div>
-
-<div *ngFor="let image of carImages">
-  <img src="{{image.imagePath}}" width="500" height="400" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png">
-  <h3>Galery Try</h3>
-  <img src="{{image.imagePath}}" class="img-fluid" alt="...">
-  <h3>Galery Try 2</h3>
-  ​<picture>
-    <source srcset="{{carImages}}" type="image/svg+xml">
-    <img src="..." class="img-fluid img-thumbnail" alt="...">
-  </picture>
-
-  <!-- carousel try -->
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner" *ngFor="let image of carImages">
-      <div class="carousel-item active">
-        <img src="{{image.imagePath}}" class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <!-- carousel try -->
-
-
-</div>
-
-
-
-<!-- <img src="./assets/test.jpg" alt=""> -->
-
-<div>
-  <h3>Image Upload</h3>
-  <!-- <input  type="file" (change)="onFileSelected($event)">
-  <button type="button" class="btn btn-dark" (click)="onUpload() ">Upload</button>
-
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1">></span>
-    <input type="file" (change)="onFileSelected($event)" class="form-control" placeholder="Username" aria-label="Filename" aria-describedby="basic-addon1">
-  </div>
 </div> -->
 
-<div class="input-group">
-  <input type="file" (change)="onFileSelected($event)" class="form-control" id="filePath" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-  <button *ngIf="fileSelected" class="btn btn-dark" type="button" id="inputGroupFileAddon04" (click)="onUpload()">Upload Image</button>
+<div class="card mb-4 shadow p-3">
+  <strong>Image Upload</strong>
+  <div class="input-group">
+    <input type="file" (change)="onFileSelected($event)" class="form-control" id="filePath" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+    <button *ngIf="fileSelected" class="btn btn-dark" type="button" id="inputGroupFileAddon04" (click)="onUpload()">Upload Image</button>
+  </div>
 </div>
