@@ -18,6 +18,8 @@ export class CarComponent implements OnInit {
   currentCarImages: CarImage[];
   currentCar: CarDetailsDto;
   imagePath: string;
+  filterTextColor='';
+  filterTextBrand='';
 
   dataLoaded = false;
   constructor(

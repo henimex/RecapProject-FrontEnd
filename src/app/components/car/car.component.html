@@ -1,33 +1,58 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Action
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
 <!-- Spinner -->
-<div
-  *ngIf="dataLoaded == false"
-  class="spinner-border text-warning"
-  role="status"
->
+<div *ngIf="dataLoaded == false" class="spinner-border text-warning" role="status">
   <span class="visually-hidden">Yükleniyor...</span>
+</div>
+
+
+<!-- Search Bar -->
+<!-- FilterText For Brand -->
+<div class="row shadow p-3">
+  <div class="col-md-6">
+    <input type="text" [(ngModel)]="filterTextBrand" class="form-control" id="filterTextBrand"
+      placeholder="Search For Brand">
+  </div>
+
+  <!-- Search Dropdown For Brand -->
+
+
+  <!-- FilterText For Color -->
+  <div class="col-md-6">
+    <input type="text" [(ngModel)]="filterTextColor" class="form-control" id="filterTextColor"
+      placeholder="Search For Color">
+  </div>
+
+  <!-- Dropdown For Color -->
+
+
+</div>
+
+<div class="alert alert-warning" *ngIf="filterTextColor.length > 2 || filterTextBrand.length > 2">
+  {{ filterTextColor }} {{ filterTextBrand }} Results.
 </div>
 
 <!-- Card View -->
 <div>
   <div class="row">
-    <div
-      *ngFor="let carDto of carDetails"
-      class="card"
-      style="width: 18rem"
-      class="carbox"
-    >
+    <div *ngFor="let carDto of carDetails | filterCarDetails: filterTextBrand: filterTextColor" class="card"
+      style="width: 19rem" class="carbox">
       <div class="card mb-4 shadow p-3">
-        <img
-          src="{{ carDto.imagePath }}"
-          class="card-img-top"
-          alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png"
-        />
+        <img src="{{ carDto.imagePath }}" class="card-img-top"
+          alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png" />
         <div class="card-body">
-          <h5
-            (click)="setCurrentCar(carDto)"
-            routerLink="/images/car/{{ carDto.carId }}"
-            class="card-title"
-          >
+          <h5 (click)="setCurrentCar(carDto)" routerLink="/images/car/{{ carDto.carId }}" class="card-title">
             {{ carDto.brandName }}
           </h5>
 
@@ -49,6 +74,7 @@
 <div class="card mb-4 shadow p-3">
   As A Table
 </div>
+
 <!-- Data Table -->
 <div class="card mb-4 shadow p-3">
   <table *ngIf="dataLoaded == true" class="table table-hover table-dark">
@@ -63,7 +89,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let carDto of carDetails">
+      <tr *ngFor="let carDto of carDetails | filterCarDetails: filterTextBrand: filterTextColor">
         <th scope="row">{{ carDto.carId }}</th>
         <td>{{ carDto.brandName }}</td>
         <td>{{ carDto.colorName }}</td>
@@ -74,3 +100,10 @@
     </tbody>
   </table>
 </div>
+
+<!-- dropdown test -->
+
+<!-- Example single danger button -->
+
+
+

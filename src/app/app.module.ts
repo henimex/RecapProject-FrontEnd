@@ -12,17 +12,23 @@ import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { FilterPipe } from './pipes/filter-brand.pipe';
+import { FilterCarDetailsPipe } from './pipes/filter-car-details.pipe';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [	
-    AppComponent, CarComponent, BrandComponent, ColorComponent, CarImageComponent, CustomerComponent, RentalComponent, NaviComponent
+    AppComponent, CarComponent, BrandComponent, ColorComponent, CarImageComponent, CustomerComponent, RentalComponent, NaviComponent, DiscountPipe, FilterPipe, FilterCarDetailsPipe
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
