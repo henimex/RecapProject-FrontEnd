@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { RentRequestComponent } from './components/rent-request/rent-request.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     FilterPipe,
     FilterCarDetailsPipe,
     CarFilterComponent,
+    RentRequestComponent
   ],
   imports: [
     BrowserModule,

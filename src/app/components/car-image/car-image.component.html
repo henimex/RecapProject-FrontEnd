@@ -22,7 +22,7 @@
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-dark">Create Rent Request</button>
+        <button type="button" class="w-100 btn btn-dark" (click)="rentRequest()" routerLink="/rental/{{carDto.carId}}/s">Create Rent Request</button>
       </div>
     </div>
     </div>
@@ -38,7 +38,7 @@
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-warning">Create Rent Request</button>
+        <button type="button" class="w-100 btn btn-warning" (click)="rentRequest()" routerLink="/rental/{{carDto.carId}}/t">Create Rent Request</button>
       </div>
     </div>
     </div>
@@ -54,7 +54,7 @@
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-warning">Create Rent Request</button>
+        <button type="button" class="w-100 btn btn-warning" (click)="rentRequest()" routerLink="/rental/{{carDto.carId}}/v">Create Rent Request</button>
       </div>
     </div>
     </div>

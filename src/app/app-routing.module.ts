@@ -4,6 +4,7 @@ import { BrandComponent } from './components/brand/brand.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorComponent } from './components/color/color.component';
+import { RentRequestComponent } from './components/rent-request/rent-request.component';
 import { RentalComponent } from './components/rental/rental.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'rentals', component: RentalComponent },
   { path: 'carImages', component: CarImageComponent },
   { path: 'cars/filter/:filterColor/:filterBrand', component: CarComponent },
+  { path: 'rental/:rentCarId/:rentType', component: RentRequestComponent },
 ];
 
 // 0 - Neyi Filtreliyorum : [Arabaları] neye göre filtre uygulayacağım [Markasına] göre

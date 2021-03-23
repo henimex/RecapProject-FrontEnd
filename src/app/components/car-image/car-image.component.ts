@@ -5,6 +5,7 @@ import { CarDetailsDto } from 'src/app/models/Dto/carDetailDto';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { HttpClient } from '@angular/common/http';
 import { CarService } from 'src/app/services/car.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-image',
@@ -28,7 +29,8 @@ export class CarImageComponent implements OnInit {
     private carImageService: CarImageService,
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -113,6 +115,10 @@ export class CarImageComponent implements OnInit {
       this.carDetails = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  rentRequest(){
+    this.toastrService.success("Start Rental","RENT")
   }
 
   // onUpload(){
