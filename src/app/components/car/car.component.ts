@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
@@ -29,7 +30,8 @@ export class CarComponent implements OnInit {
   constructor(
     private carService: CarService,
     private carImageService: CarImageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -107,7 +109,7 @@ export class CarComponent implements OnInit {
       this.dataLoaded = true;
       this.carClipartImage(this.carDetails)
       if (this.carDetails.length === 0 ) {
-        console.log("no result")
+        this.toastrService.error("No Cars Available With Filtered Specs","Empty Result")
       }
     })
   }
