@@ -1,16 +1,3 @@
-<div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Action
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Separated link</a></li>
-  </ul>
-</div>
-
 <!-- Spinner -->
 <div *ngIf="dataLoaded == false" class="spinner-border text-warning" role="status">
   <span class="visually-hidden">Yükleniyor...</span>
@@ -25,23 +12,20 @@
       placeholder="Search For Brand">
   </div>
 
-  <!-- Search Dropdown For Brand -->
-
-
   <!-- FilterText For Color -->
   <div class="col-md-6">
     <input type="text" [(ngModel)]="filterTextColor" class="form-control" id="filterTextColor"
       placeholder="Search For Color">
   </div>
-
-  <!-- Dropdown For Color -->
-
-
 </div>
 
 <div class="alert alert-warning" *ngIf="filterTextColor.length > 2 || filterTextBrand.length > 2">
   {{ filterTextColor }} {{ filterTextBrand }} Results.
-</div>
+</div><br>
+
+<!-- Filter Buttons -->
+
+<app-car-filter></app-car-filter>
 
 <!-- Card View -->
 <div>
@@ -104,6 +88,3 @@
 <!-- dropdown test -->
 
 <!-- Example single danger button -->
-
-
-

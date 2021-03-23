@@ -32,13 +32,13 @@
         <h4 class="my-0 fw-normal">Traveller</h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">%5 disc<small class="text-muted"> / mo</small></h1>
+        <h1 class="card-title pricing-card-title">{{carDto.dailyPrice | discount: 10}} TL<small class="text-muted"> / mo</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
           <li>Brand : {{ carDto.brandName }}</li>
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-warning">Contact Us</button>
+        <button type="button" class="w-100 btn btn-warning">Create Rent Request</button>
       </div>
     </div>
     </div>
@@ -48,13 +48,13 @@
         <h4 class="my-0 fw-normal">Voyager</h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">%10 disc<small class="text-muted"> / yr</small></h1>
+        <h1 class="card-title pricing-card-title">{{carDto.dailyPrice | discount: 20}} TL<small class="text-muted"> / yr</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
           <li>Brand : {{ carDto.brandName }}</li>
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-warning">Contact Us</button>
+        <button type="button" class="w-100 btn btn-warning">Create Rent Request</button>
       </div>
     </div>
     </div>

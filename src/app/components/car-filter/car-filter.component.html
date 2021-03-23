@@ -1,0 +1,23 @@
+<div class="row mb-2 shadow p-3">
+    <div class="col col-4">
+        <select [(ngModel)]="colorFilter" class="form-select" aria-label="Color Selection">
+            <option *ngFor="let color of colors" [value]="color.id" [selected]="getSelectedColor(color.id)">{{color.colorName}}</option>
+          </select>
+    </div>
+    <div class="col col-4">
+        <select [(ngModel)]="brandFilter" class="form-select" aria-label="Brand Selection">
+            <option *ngFor="let brand of brands" [value]="brand.id" [selected]="getSelectedBrand(brand.id)">{{brand.brandName}}</option>
+          </select>
+    </div>
+    <div class="col d-grid gap-2">
+        <a *ngIf="colorFilter && brandFilter" routerLink="/cars/filter/{{colorFilter}}/{{brandFilter}}" class="btn btn-dark">Filter</a>
+    </div>
+    <div class="d-grid gap-2" *ngIf="colorFilter || brandFilter"><p></p>
+        <a routerLink="/cars" class="btn btn-warning">Clear Filter</a>
+    </div>
+    <p></p>
+    <div class="alert alert-dark" *ngIf="brandFilter">
+        tags will be added<br>
+        Brand:{{brandFilter}} Color:{{colorFilter}}
+    </div>
+</div>

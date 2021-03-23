@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'color', component: ColorComponent },
   { path: 'rentals', component: RentalComponent },
   { path: 'carImages', component: CarImageComponent },
+  { path: 'cars/filter/:filterColor/:filterBrand', component: CarComponent },
 ];
 
 // 0 - Neyi Filtreliyorum : [Arabaları] neye göre filtre uygulayacağım [Markasına] göre

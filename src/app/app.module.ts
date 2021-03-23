@@ -16,12 +16,13 @@ import { DiscountPipe } from './pipes/discount.pipe';
 import { FilterPipe } from './pipes/filter-brand.pipe';
 import { FilterCarDetailsPipe } from './pipes/filter-car-details.pipe';
 import { FormsModule } from '@angular/forms';
+import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 
 
 @NgModule({
   declarations: [	
-    AppComponent, CarComponent, BrandComponent, ColorComponent, CarImageComponent, CustomerComponent, RentalComponent, NaviComponent, DiscountPipe, FilterPipe, FilterCarDetailsPipe
+    AppComponent, CarComponent, BrandComponent, ColorComponent, CarImageComponent, CustomerComponent, RentalComponent, NaviComponent, DiscountPipe, FilterPipe, FilterCarDetailsPipe, CarFilterComponent
    ],
   imports: [
     BrowserModule,
