@@ -16,11 +16,15 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { FilterPipe } from './pipes/filter-brand.pipe';
 import { FilterCarDetailsPipe } from './pipes/filter-car-details.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { CustomerAddComponent } from './components/customer-add/customer-add.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { RentRequestComponent } from './components/rent-request/rent-request.com
     FilterPipe,
     FilterCarDetailsPipe,
     CarFilterComponent,
-    RentRequestComponent
+    RentRequestComponent,
+    BrandAddComponent,
+    CarAddComponent,
+    ColorAddComponent,
+    CustomerAddComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +53,7 @@ import { RentRequestComponent } from './components/rent-request/rent-request.com
     NgImageSliderModule,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       progressBar: true,

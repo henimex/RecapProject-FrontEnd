@@ -1,0 +1,49 @@
+<div class="row content">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><h5 class="title">Add New Color to Palette</h5></div>
+            <div class="card-body">
+                <form [formGroup]="colorAddForm">
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="colorName">Color Name</label>
+                            <input type="text" id="colorName" formControlName="colorName" class="form-control" value="DENEME"
+                                placeholder="Please Type Color Name" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-fill btn-primary" (click)="addColor()">Add Color</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><h5 class="title">Update Color From Palette</h5></div>
+            <div class="card-body">
+                <form [formGroup]="colorUpdateForm">
+                    <div class="mb-3">
+                        <label for="colorUName2">ColorName</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Select Color
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                              <li *ngFor="let color of colors" (click)="setCurrentColor(color)"><a class="dropdown-item">{{color.colorName}}</a></li>
+                            </ul>
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <label  for="colorUName"></label>
+                        <span *ngIf="currentColor" formControlName="colorUId"> Color Id: {{currentColor.id}} Color Name For Update : {{currentColor.colorName}}</span>
+                        <input  type="text" id="colorUName" formControlName="colorUName" class="form-control" placeholder="Update Color Name">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-secondary" click="updateColor(color)">Update Color</button>
+            </div>
+        </div>
+    </div>
+</div>
