@@ -17,6 +17,7 @@ import { ColorService } from 'src/app/services/color.service';
 export class ColorAddComponent implements OnInit {
   colorAddForm: FormGroup;
   colorUpdateForm: FormGroup;
+  employeeForm: FormGroup;
   colors: Color[];
   currentColor: Color;
 
@@ -27,6 +28,17 @@ export class ColorAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.employeeForm = new FormGroup({
+      fullName: new FormControl(),
+      email: new FormControl(),
+      skills: new FormGroup({
+        skillName: new FormControl(),
+        experienceInYears: new FormControl(),
+        proficiency: new FormControl()
+      })
+    });
+
     this.getColors();
     this.createColorAddForm();
     this.createColorUpdateForm();
@@ -88,4 +100,30 @@ export class ColorAddComponent implements OnInit {
       this.colors = response.data;
     });
   }
+
+  deleteColor(color:Color){
+
+  }
+
+  selectedColor(color:Color){
+    this.currentColor=color
+  }
+
+  update2(color:Color){
+    this.colorService.updateColor(color).subscribe((response) =>{
+      this.toastrService.success(response.message)
+    })
+  }
+
+
+  //---Fresh Start---//
+
+  onSubmit():void{
+    console.log(this.employeeForm);
+    console.log(this.employeeForm.value);
+    
+    console.log(this.employeeForm.controls.fullName.touched);
+    console.log(this.employeeForm.get('fullName').value);
+  }
+
 }

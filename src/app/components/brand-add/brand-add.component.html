@@ -1,1 +1,50 @@
-<p>brand-add works!</p>
+<div class="row content">
+    <div class="col-md-12">
+        <h1 class="app-title">Crud Test Reactive Form</h1>
+    </div>
+</div>
+<div class="row content">
+    <div class="col-md-offset-1 col-md-5">
+        <div class="card">
+            <div class="card-header">Form</div>
+            <div class="card-body">
+                
+                <form autocomplete="off" [formGroup]="brandAddForm">
+                    <div class="form-group" [ngClass]="{ 'has-error':isSubmited && _fc.brandName.errors }">
+                        <label for="brandName">Brand Name</label>
+                        <input type="text" class="form-control" id="brandName" formControlName="brandName">
+                        <span *ngIf="isSubmited && _fc.brandName.errors" class="help-block">Brand Name is Required</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-success" (click)="save()"> Submit </button>
+                    <button type="button" class="btn btn-danger" (click)="reset()"> Reset </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header"> Brands </div>
+            <div class="card-body">
+                <table style="width:100%">
+                    <tr>
+                        <th>Brand Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let brand of brands">
+                        <td>{{brand.brandName}}</td>
+                        <td>
+                            <button (click)="edit(brand.id)" class="btn btn-sm btn-warning" >
+                                <span>Edit</span>
+                            </button>
+                            <button (click)="delete(brand.id)" class="btn btn-sm btn-warning" >
+                                <span>Delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'cars/filter/:filterColor/:filterBrand', component: CarComponent },
   { path: 'rental/:rentCarId/:rentType', component: RentRequestComponent },
   { path: 'colors/add', component: ColorAddComponent },
+  { path: 'brands/add', component: BrandAddComponent },
 ];
 
 // 0 - Neyi Filtreliyorum : [Arabaları] neye göre filtre uygulayacağım [Markasına] göre
