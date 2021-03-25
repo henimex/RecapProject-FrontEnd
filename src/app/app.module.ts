@@ -21,10 +21,11 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
 
 import { ToastrModule } from 'ngx-toastr';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
-import { BrandAddComponent } from './components/brand-add/brand-add.component';
-import { CarAddComponent } from './components/car-add/car-add.component';
-import { ColorAddComponent } from './components/color-add/color-add.component';
-import { CustomerAddComponent } from './components/customer-add/customer-add.component';
+import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { ColorAddComponent } from './components/color/color-add/color-add.component';
+import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
+import { PreviewComponent } from './components/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CustomerAddComponent } from './components/customer-add/customer-add.com
     BrandAddComponent,
     CarAddComponent,
     ColorAddComponent,
-    CustomerAddComponent
+    CustomerAddComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,

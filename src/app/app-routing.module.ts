@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
-import { ColorAddComponent } from './components/color-add/color-add.component';
+import { ColorAddComponent } from './components/color/color-add/color-add.component';
 import { ColorComponent } from './components/color/color.component';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
 import { RentalComponent } from './components/rental/rental.component';
