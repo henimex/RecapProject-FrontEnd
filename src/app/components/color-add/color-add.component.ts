@@ -20,6 +20,7 @@ export class ColorAddComponent implements OnInit {
   employeeForm: FormGroup;
   colors: Color[];
   currentColor: Color;
+  fullNameLength = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,22 +29,17 @@ export class ColorAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    this.employeeForm = new FormGroup({
-      fullName: new FormControl(),
-      email: new FormControl(),
-      skills: new FormGroup({
-        skillName: new FormControl(),
-        experienceInYears: new FormControl(),
-        proficiency: new FormControl()
-      })
-    });
+    
+    this.initFormv2();
+    this.lengthCounter();
+    this.jsonValueObserver();
 
     this.getColors();
     this.createColorAddForm();
     this.createColorUpdateForm();
   }
 
+  //#region Self Codes
   createColorAddForm() {
     this.colorAddForm = this.formBuilder.group({
       colorName: ['', Validators.required],
@@ -114,9 +110,38 @@ export class ColorAddComponent implements OnInit {
       this.toastrService.success(response.message)
     })
   }
-
+//#endregion
 
   //---Fresh Start---//
+
+  initFormv1(){
+    this.employeeForm = new FormGroup({
+      fullName: new FormControl(),
+      email: new FormControl(),
+      skills: new FormGroup({
+        skillName: new FormControl(),
+        experienceInYears: new FormControl(),
+        proficiency: new FormControl()
+      })
+    });
+  }
+
+  initFormv2(){
+    this.employeeForm = this.formBuilder.group({
+      fullName:['',[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
+      email:[''],
+      skills:this.formBuilder.group({
+        skillName:[''],
+        experienceInYears:[''],
+        proficiency:['beginner'],
+      })
+    })
+
+    this.colorUpdateForm = this.formBuilder.group({
+      colorUName: ['', Validators.required],
+      colorUId:['', Validators.required]
+    });
+  }
 
   onSubmit():void{
     console.log(this.employeeForm);
@@ -124,6 +149,30 @@ export class ColorAddComponent implements OnInit {
     
     console.log(this.employeeForm.controls.fullName.touched);
     console.log(this.employeeForm.get('fullName').value);
+  }
+
+  loadData():void{
+    this.employeeForm.setValue({
+      fullName: "Ferhat OYGUR",
+      email: "henimex@gmail.com",
+      skills: {
+        skillName: "C Sharp",
+        experienceInYears: 5,
+        proficiency: "intermediate"
+      }
+    })
+  }
+
+  lengthCounter(){
+    this.employeeForm.get('fullName').valueChanges.subscribe((data:any) =>{
+      this.fullNameLength = data.length;
+    })
+  }
+
+  jsonValueObserver(){
+    this.employeeForm.valueChanges.subscribe((data:any) =>{
+      console.log(JSON.stringify(data))
+    })
   }
 
 }
