@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
+import { BrandUpdateComponent } from './components/brand/brand-update/brand-update.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
@@ -11,20 +12,28 @@ import { RentalComponent } from './components/rental/rental.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
+
   { path: 'cars', component: CarComponent },
   { path: 'cars/brand/:brandId', component: CarComponent },
-  { path: 'images/car/:carId', component: CarImageComponent },
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/:carId', component: CarComponent },
-  { path: 'brands', component: BrandComponent },
-  { path: 'images', component: CarImageComponent },
-  { path: 'color', component: ColorComponent },
-  { path: 'rentals', component: RentalComponent },
-  { path: 'carImages', component: CarImageComponent },
   { path: 'cars/filter/:filterColor/:filterBrand', component: CarComponent },
-  { path: 'rental/:rentCarId/:rentType', component: RentRequestComponent },
-  { path: 'colors/add', component: ColorAddComponent },
+  
+  { path: 'images', component: CarImageComponent },
+  { path: 'images/car/:carId', component: CarImageComponent },
+  { path: 'carImages', component: CarImageComponent },
+
+  { path: 'brands', component: BrandComponent },
   { path: 'brands/add', component: BrandAddComponent },
+  { path: 'brands/brands/add', component: BrandAddComponent },
+  { path: 'brands/update/:brandId', component: BrandUpdateComponent },
+
+  { path: 'color', component: ColorComponent },
+  { path: 'colors/add', component: ColorAddComponent },
+
+  { path: 'rentals', component: RentalComponent },
+  { path: 'rental/:rentCarId/:rentType', component: RentRequestComponent },
+
 ];
 
 // 0 - Neyi Filtreliyorum : [Arabaları] neye göre filtre uygulayacağım [Markasına] göre
