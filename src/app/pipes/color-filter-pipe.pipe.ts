@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Color } from '../models/color';
 
 @Pipe({
-  name: 'filterColor'
+  name: 'colorFilterPipe'
 })
-export class FilterColorPipe implements PipeTransform {
+export class ColorFilterPipePipe implements PipeTransform {
 
   transform(value: Color[], filterText: string): Color[] {
     filterText = filterText ? filterText.toLocaleLowerCase() : '';
@@ -16,4 +16,5 @@ export class FilterColorPipe implements PipeTransform {
         )
       : value;
   }
+
 }

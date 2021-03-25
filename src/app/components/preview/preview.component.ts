@@ -6,8 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Color } from 'src/app/models/color';
-import { ColorService } from 'src/app/services/color.service';
+
 
 @Component({
   selector: 'app-preview',

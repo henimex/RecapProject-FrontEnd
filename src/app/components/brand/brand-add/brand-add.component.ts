@@ -19,10 +19,10 @@ export class BrandAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createBqrandAddForm();
+    this.createBrandAddForm();
   }
 
-  createBqrandAddForm() {
+  createBrandAddForm() {
     this.brandAddForm = this.formBuilder.group({
       brandName:['', Validators.required]
     })
@@ -44,7 +44,11 @@ export class BrandAddComponent implements OnInit {
       this.toastrService.error("Form Information Empty Or Invalid Please Check Again","Invalid Information");
     }
   }
-  
+
+  addNewBrandRefactored(){
+    this.brandService.addNewBrandSolid(this.brandAddForm);
+  }
+
 
 
   //--endregion

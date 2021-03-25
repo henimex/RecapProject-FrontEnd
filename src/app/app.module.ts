@@ -23,10 +23,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
 import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
 import { CarAddComponent } from './components/car/car-add/car-add.component';
-import { ColorAddComponent } from './components/color/color-add/color-add.component';
 import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { BrandUpdateComponent } from './components/brand/brand-update/brand-update.component';
+import { ColorAddComponent } from './components/color/color-add/color-add.component';
+import { ColorUpdateComponent } from './components/color/color-update/color-update.component';
+import { CustomerUpdateComponent } from './components/customer/customer-update/customer-update.component';
+import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -45,10 +48,13 @@ import { BrandUpdateComponent } from './components/brand/brand-update/brand-upda
     RentRequestComponent,
     BrandAddComponent,
     CarAddComponent,
-    ColorAddComponent,
     CustomerAddComponent,
     PreviewComponent,
-    BrandUpdateComponent
+    BrandUpdateComponent,
+    ColorAddComponent,
+    ColorUpdateComponent,
+    CustomerUpdateComponent,
+    ColorFilterPipePipe
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Brand } from '../models/brand';
 import { ListResponseModel } from '../models/ResponseModels/listResponseModel';
@@ -11,7 +13,7 @@ import { SingleResponseModel } from '../models/ResponseModels/singleResponseMode
 })
 export class BrandService {
   apiUrl = 'https://localhost:44327/api/';
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private toastrService: ToastrService) {}
 
   getBrands(): Observable<ListResponseModel<Brand>> {
     let newPath = this.apiUrl + 'brands/get-all';
@@ -36,5 +38,39 @@ export class BrandService {
   deleteBrand(brand: Brand): Observable<ResponseModelBase> {
     let newPath = this.apiUrl + 'brands/delete';
     return this.httpClient.post<ResponseModelBase>(newPath, brand);
+  }
+
+  addNewBrandSolid(formGroup:FormGroup){
+    if (formGroup.valid) {
+      let brandModel = Object.assign({},formGroup.value);
+      this.addBrand(brandModel).subscribe((response) => {
+        this.toastrService.success(response.message,"Operation Successfull");
+      },responseError => {
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Something Wrong");
+          }
+        }
+      })
+    } else {
+      this.toastrService.error("Form Information Empty Or Invalid Please Check Again","Invalid Information");
+    }
+  }
+
+  updateBrandSolid(formGroup:FormGroup){
+    if (formGroup.valid) {
+      let brandModel = Object.assign({},formGroup.value);
+      this.updateBrand(brandModel).subscribe((response) => {
+        this.toastrService.success(response.message,"Operation Successfull");
+      },responseError => {
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Something Wrong");
+          }
+        }
+      })
+    } else {
+      this.toastrService.error("Form Information Empty Or Invalid Please Check Again","Invalid Information");
+    }
   }
 }

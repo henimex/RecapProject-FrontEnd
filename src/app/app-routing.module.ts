@@ -6,6 +6,8 @@ import { BrandComponent } from './components/brand/brand.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorAddComponent } from './components/color/color-add/color-add.component';
+import { ColorUpdateComponent } from './components/color/color-update/color-update.component';
+
 import { ColorComponent } from './components/color/color.component';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
 import { RentalComponent } from './components/rental/rental.component';
@@ -28,8 +30,10 @@ const routes: Routes = [
   { path: 'brands/brands/add', component: BrandAddComponent },
   { path: 'brands/update/:brandId', component: BrandUpdateComponent },
 
-  { path: 'color', component: ColorComponent },
+  { path: 'colors', component: ColorComponent },
   { path: 'colors/add', component: ColorAddComponent },
+  { path: 'colors/colors/add', component: ColorAddComponent },
+  { path: 'colors/update/:colorId', component: ColorUpdateComponent },
 
   { path: 'rentals', component: RentalComponent },
   { path: 'rental/:rentCarId/:rentType', component: RentRequestComponent },

@@ -2,18 +2,18 @@
     <div class="col-log-9">
         <div class="card">
             <div class="card-header fw-bold">
-                <i class="bi-plus-square me-1"></i>Update Brand
+                <i class="bi-plus-square me-1"></i>Update Color
             </div>
             <div class="card-body">
-                <form autocomplate="off" *ngIf="brand" [formGroup]="brandUpdateForm" (ngSubmit)="updateBrandRefactored()">
+                <form autocomplate="off" *ngIf="color" [formGroup]="colorUpdateForm" (ngSubmit)="updateColorRefactored()">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="brandName" placeholder="Edit Brand" formControlName="brandName">
-                        <label for="brandName">Edit Brand Name</label>
+                        <input type="text" class="form-control" id="colorName" placeholder="Edit Color" formControlName="colorName">
+                        <label for="colorName">Edit Color Name</label>
                     </div>
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-dark px-5 fw-bold">
-                            <i class="bi-save2 me-1"></i>Update Brand
+                            <i class="bi-save2 me-1"></i>Update Color
                         </button>
                     </div>
                 </form>
@@ -22,8 +22,8 @@
     </div>
     <div class="col-lg-3">
         <div class="d-grid">
-            <button class="btn btn-warning" routerLink="/brands">
-                <i class="bi-list me-1"></i>Back to Brands List
+            <button class="btn btn-warning" routerLink="/colors">
+                <i class="bi-list me-1"></i>Back to Colors List
             </button>
         </div>
     </div>

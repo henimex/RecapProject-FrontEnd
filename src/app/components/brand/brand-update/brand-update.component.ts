@@ -58,21 +58,8 @@ export class BrandUpdateComponent implements OnInit {
     }
   }
 
-  updateBrandorg(){
-    if (this.brandUpdateForm.valid) {
-      let brandModel = Object.assign({},this.brandUpdateForm.value);
-      this.brandService.updateBrand(brandModel).subscribe((response) => {
-        this.toastrService.success(response.message,"Operation Successfull");
-      },responseError => {
-        if (responseError.error.Errors.length > 0) {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Something Wrong");
-          }
-        }
-      })
-    } else {
-      this.toastrService.error("Form Information Empty Or Invalid Please Check Again","Invalid Information");
-    }
+  updateBrandRefactored(){
+    this.brandService.updateBrandSolid(this.brandUpdateForm);
   }
 
 }

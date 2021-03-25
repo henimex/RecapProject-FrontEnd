@@ -1,64 +1,30 @@
-<div class="row content">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="title">Add New Color to Palette</h5>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="colorAddForm">
-          <div class="form-group">
-            <div class="mb-3">
-              <label for="colorName">Color Name</label>
-              <input type="text" id="colorName" formControlName="colorName" class="form-control" value="DENEME"
-                placeholder="Please Type Color Name" />
+<div class="row mt-4">
+    <div class="col-log-9">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <i class="bi-plus-square me-1"></i>Add New Color
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-fill btn-primary" (click)="addColor()">Add Color</button>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="title">Update Color From Palette</h5>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="colorUpdateForm">
-          <div class="mb-3">
-            <label for="colorName">Color Name</label>
-            <input type="text" id="colorName" formControlName="colorName" class="form-control"
-              placeholder="Please Type Color Name" />
-          </div>
-        </form>
-        <div class="card-footer">
-          <button class="btn btn-secondary">Update Color</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
+            <div class="card-body">
+                <form autocomplate="off" [formGroup]="colorAddForm" (ngSubmit)="addNewColorRefactored()">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="colorName" placeholder="New Color" formControlName="colorName">
+                        <label for="colorName">Color Name</label>
+                    </div>
 
-  </div>
-  <p></p>
-  <div class="col-md-6">
-    <label for="colorName">Color Name: </label>
-    <input type="text" *ngIf="currentColor" [(ngModel)]="currentColor.colorName" [value]=""><br>
-    <button *ngIf="currentColor" (click)="update2(currentColor)"> Update2 </button>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">ColorId</th>
-          <th scope="col">ColorName</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let color of colors">
-          <td>{{color.id}}</td>
-          <td (click)="selectedColor(color)">{{color.colorName}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-dark px-5 fw-bold">
+                            <i class="bi-plus-square me-1"></i>Add New Color
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="d-grid">
+            <button class="btn btn-warning" routerLink="/colors">
+                <i class="bi-list me-1"></i>Back to Color List
+            </button>
+        </div>
+    </div>
+</div>

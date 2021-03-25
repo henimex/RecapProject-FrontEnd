@@ -58,7 +58,7 @@
                 <i class="bi-plus-square me-1"></i>Add New Brand
             </div>
             <div class="card-body">
-                <form autocomplate="off" [formGroup]="brandAddForm" (ngSubmit)="addNewBrand()">
+                <form autocomplate="off" [formGroup]="brandAddForm" (ngSubmit)="addNewBrandRefactored()">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="brandName" placeholder="New Brand" formControlName="brandName">
                         <label for="brandName">Brand Name</label>
