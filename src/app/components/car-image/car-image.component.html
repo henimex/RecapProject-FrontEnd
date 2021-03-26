@@ -5,8 +5,23 @@
       <h1 class="display-4">About {{carDto.modelYear}} {{carDto.brandName}}</h1>
       <p class="lead">{{ carDto.description }}</p>
       <p class="lead">Create your Rent Request and wait for a short time. Your application will be approved and the car delivery process will start immediately</p>
-    </div>
-    
+    </div>   
+  </div>
+
+  <div class="pricing-header  text-center">
+    <div class="card mb-4 shadow p-3"> 
+      <div class="card">
+        <div class="card-header">
+          <h3 class="display-8">Check Availability</h3>
+        <div class="card-body">
+          <form [formGroup]="" (ngSubmit)="checkRentAvailability(1)">
+            <label for="dateStart">Start Date</label>
+            <input type="date" class="form-control" id="dateStart" formControlName="dateStart">
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>   
   </div>
 
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">

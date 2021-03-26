@@ -9,16 +9,23 @@ import { ListResponseModel } from '../models/ResponseModels/listResponseModel';
   providedIn: 'root',
 })
 export class RentalService {
-  apiUrl = 'https://localhost:44327/api/rentals/get-all';
-  detailUrl = 'https://localhost:44327/api/rentals/get-rd';
+  apiUrl = 'https://localhost:44327/api/rentals/';
+
 
   constructor(private httpClient: HttpClient) {}
 
   getRentals(): Observable<ListResponseModel<Rental>> {
-    return this.httpClient.get<ListResponseModel<Rental>>(this.apiUrl);
+    let newPath = this.apiUrl + 'get-all'
+    return this.httpClient.get<ListResponseModel<Rental>>(newPath);
   }
 
   getRentalDetails(): Observable<ListResponseModel<RentalsDto>> {
-    return this.httpClient.get<ListResponseModel<RentalsDto>>(this.detailUrl);
+    let newPath = this.apiUrl + 'get-rd'
+    return this.httpClient.get<ListResponseModel<RentalsDto>>(newPath);
+  }
+
+  getRentalDetailsByCarId(carId:number): Observable<ListResponseModel<RentalsDto>> {
+    let newPath = this.apiUrl + 'get-rd-car-id?carId='+carId
+    return this.httpClient.get<ListResponseModel<RentalsDto>>(newPath);
   }
 }

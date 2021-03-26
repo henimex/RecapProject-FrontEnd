@@ -6,6 +6,9 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { HttpClient } from '@angular/common/http';
 import { CarService } from 'src/app/services/car.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RentalService } from 'src/app/services/rental.service';
+import { RentalsDto } from 'src/app/models/Dto/rentalsDto';
 
 @Component({
   selector: 'app-car-image',
@@ -22,15 +25,19 @@ export class CarImageComponent implements OnInit {
   selectedFile: File;
   currentCarId: string;
   fileSelected: boolean = false;
-  noImage: string =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png';
+  noImage: string ='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png';
+  rentable: boolean = false;
+  rentalAddForm: FormGroup;
+  rentalDto: RentalsDto[];
 
   constructor(
     private carImageService: CarImageService,
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private httpClient: HttpClient,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private formBuilder: FormBuilder,
+    private rentalService: RentalService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +51,29 @@ export class CarImageComponent implements OnInit {
         this.getImages();
       }
     });
+  }
+
+  checkRentAvailability(carId: number){
+    let rentModel = Object.assign({},this.rentalAddForm.value);
+    this.rentalService.getRentalDetailsByCarId(rentModel.carId).subscribe(response => {
+      //this.rentalDto = response.data.filter((x:RentalsDto) =>sDate > x.returnDate).filter((x:RentalsDto) => sDate < x.rentDate)
+      //this.rentalDto = response.data.filter((x:RentalsDto) => sDate > x.rentDate && sDate < x.returnDate).filter((x:RentalsDto) => eDate < x.rentDate)
+      //this.rentalDto = response.data.filter((x:RentalsDto) => (rentModel.rentStartDate > x.rentDate && sDate < x.returnDate) && ())
+      console.log(this.rentalDto)
+      if (this.rentalDto.length < 0) {
+        console.log("uzunluk 0 geldi kiralanabilir")
+      }
+    })
+  }
+
+  createRentAddForm(){
+    this.rentalAddForm = this.formBuilder.group({
+      carId: ['', Validators.required],
+      //customerId: ['', Validators.required],
+      rentStartDate: ['', Validators.required],
+      rentEndDate: ['', Validators.required],
+      daiylPrice: ['', Validators.required]
+    })
   }
 
   getImagesForSlider(carImages: CarImage[]) {
