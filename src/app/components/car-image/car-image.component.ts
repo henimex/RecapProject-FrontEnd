@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RentalService } from 'src/app/services/rental.service';
 import { RentalsDto } from 'src/app/models/Dto/rentalsDto';
+import { Rental } from 'src/app/models/rental';
 
 @Component({
   selector: 'app-car-image',
@@ -46,6 +47,7 @@ export class CarImageComponent implements OnInit {
         this.getImagesByCarId(params['carId']);
         this.getCarDetailsById(params['carId']);
         this.currentCarId = params['carId'];
+        this.createRentAddForm()
       } else {
         console.log('New Method Should be Iplemented');
         this.getImages();
@@ -53,12 +55,9 @@ export class CarImageComponent implements OnInit {
     });
   }
 
-  checkRentAvailability(carId: number){
+  checkRentAvailability(){
     let rentModel = Object.assign({},this.rentalAddForm.value);
     this.rentalService.getRentalDetailsByCarId(rentModel.carId).subscribe(response => {
-      //this.rentalDto = response.data.filter((x:RentalsDto) =>sDate > x.returnDate).filter((x:RentalsDto) => sDate < x.rentDate)
-      //this.rentalDto = response.data.filter((x:RentalsDto) => sDate > x.rentDate && sDate < x.returnDate).filter((x:RentalsDto) => eDate < x.rentDate)
-      //this.rentalDto = response.data.filter((x:RentalsDto) => (rentModel.rentStartDate > x.rentDate && sDate < x.returnDate) && ())
       console.log(this.rentalDto)
       if (this.rentalDto.length < 0) {
         console.log("uzunluk 0 geldi kiralanabilir")
@@ -66,9 +65,19 @@ export class CarImageComponent implements OnInit {
     })
   }
 
+  checkRentAvailability2(){
+    let rentalModel = Object.assign({},this.rentalAddForm.value);
+    this.rentalService.checkRentAvailability(rentalModel).subscribe(response => {
+      if (response.success) {
+        console.log("checkRentAvailability2 true geldi")
+        this.rentable = true;
+      }
+    })
+  }
+
   createRentAddForm(){
     this.rentalAddForm = this.formBuilder.group({
-      carId: ['', Validators.required],
+      carId: [this.currentCarId, Validators.required],
       //customerId: ['', Validators.required],
       rentStartDate: ['', Validators.required],
       rentEndDate: ['', Validators.required],
@@ -150,13 +159,4 @@ export class CarImageComponent implements OnInit {
   rentRequest(){
     this.toastrService.success("Start Rental","RENT")
   }
-
-  // onUpload(){
-  //   const formData = new FormData();
-  //   formData.append('image',this.selectedFile,this.selectedFile.name)
-  //   formData.append('carId',this.currentCarId)
-  //   this.httpClient.post('https://localhost:44327/api/carImages/add',formData).subscribe(response => {
-  //     console.log(response)
-  //   })
-  // }
 }
