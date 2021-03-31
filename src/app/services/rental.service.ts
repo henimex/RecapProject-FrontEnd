@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DisabledDates } from '../models/DisabledDates';
 import { RentalsDto } from '../models/Dto/rentalsDto';
 import { Rental } from '../models/rental';
 import { ListResponseModel } from '../models/ResponseModels/listResponseModel';
@@ -33,5 +34,10 @@ export class RentalService {
   checkRentAvailability(rental: Rental): Observable<ResponseModelBase> {
     let newPath = this.apiUrl + 'check-available';
     return this.httpClient.post<ResponseModelBase>(newPath, rental);
+  }
+
+  getDisabledDates(carId: number): Observable<DisabledDates[]> {
+    let newPath = this.apiUrl + 'get-dis-days?carId=' + carId
+    return this.httpClient.get<DisabledDates[]>(newPath);
   }
 }

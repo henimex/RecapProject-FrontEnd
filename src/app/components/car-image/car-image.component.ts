@@ -9,7 +9,10 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RentalService } from 'src/app/services/rental.service';
 import { RentalsDto } from 'src/app/models/Dto/rentalsDto';
-import { Rental } from 'src/app/models/rental';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
+
+
 
 @Component({
   selector: 'app-car-image',
@@ -17,6 +20,7 @@ import { Rental } from 'src/app/models/rental';
   styleUrls: ['./car-image.component.css'],
 })
 export class CarImageComponent implements OnInit {
+  datePickerConfig:Partial<BsDatepickerConfig>;
   images: CarImage[];
   carImages: CarImage[];
   carDetails: CarDetailsDto[];
@@ -25,11 +29,13 @@ export class CarImageComponent implements OnInit {
   defaultImgPath: string;
   selectedFile: File;
   currentCarId: string;
+  carId:number;
   fileSelected: boolean = false;
   noImage: string ='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png';
   rentable: boolean = false;
   rentalAddForm: FormGroup;
   rentalDto: RentalsDto[];
+  disabledDateList:any[];
 
   constructor(
     private carImageService: CarImageService,
@@ -39,49 +45,53 @@ export class CarImageComponent implements OnInit {
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private rentalService: RentalService
-  ) {}
+  ) {
+    this.datePickerConfig = Object.assign( {}, 
+      {
+        containerClass:'theme-orange', 
+        showWeekNumbers:false,
+        minDate:new Date(2021,0,1),
+        rangeInputFormat: 'DD-MM-YYYY',
+        showClearButton:true
+      });      
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getImagesByCarId(params['carId']);
         this.getCarDetailsById(params['carId']);
-        this.currentCarId = params['carId'];
+        this.getDisabledDates(params['carId'])
+        this.carId = parseInt(params['carId']);
         this.createRentAddForm()
       } else {
         console.log('New Method Should be Iplemented');
         this.getImages();
       }
     });
+
+    this.disabledDateList = [
+      new Date('2021-03-31'),
+      new Date('2021-04-05')
+    ];
   }
 
   checkRentAvailability(){
-    let rentModel = Object.assign({},this.rentalAddForm.value);
-    this.rentalService.getRentalDetailsByCarId(rentModel.carId).subscribe(response => {
-      console.log(this.rentalDto)
-      if (this.rentalDto.length < 0) {
-        console.log("uzunluk 0 geldi kiralanabilir")
-      }
-    })
-  }
-
-  checkRentAvailability2(){
+    console.log("test")
     let rentalModel = Object.assign({},this.rentalAddForm.value);
+    console.log(this.rentalAddForm.value)
+    console.log(this.rentalAddForm.get("dateRange").value)
     this.rentalService.checkRentAvailability(rentalModel).subscribe(response => {
-      if (response.success) {
-        console.log("checkRentAvailability2 true geldi")
-        this.rentable = true;
-      }
+      console.log(response)
     })
   }
 
   createRentAddForm(){
     this.rentalAddForm = this.formBuilder.group({
-      carId: [this.currentCarId, Validators.required],
+      carId: [this.carId, Validators.required],
       //customerId: ['', Validators.required],
-      rentStartDate: ['', Validators.required],
-      rentEndDate: ['', Validators.required],
-      daiylPrice: ['', Validators.required]
+      dateRange: ['', Validators.required],
+      daiylPrice: [1, Validators.required]
     })
   }
 
@@ -158,5 +168,14 @@ export class CarImageComponent implements OnInit {
 
   rentRequest(){
     this.toastrService.success("Start Rental","RENT")
+  }
+
+  getDisabledDates(carId:number){
+    //ulen ne ugrastım seninle be teh...
+    this.rentalService.getDisabledDates(carId).subscribe((response:any[]) => {
+      for (let i = 0; i < response.length; i++) {
+        this.disabledDateList.push(new Date (response[i].toString()))
+      }
+    })
   }
 }

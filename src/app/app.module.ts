@@ -30,6 +30,7 @@ import { ColorAddComponent } from './components/color/color-add/color-add.compon
 import { ColorUpdateComponent } from './components/color/color-update/color-update.component';
 import { CustomerUpdateComponent } from './components/customer/customer-update/customer-update.component';
 import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       progressBar: true,
