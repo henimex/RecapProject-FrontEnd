@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { CarImage } from 'src/app/models/carImage';
 import { CarDetailsDto } from 'src/app/models/Dto/carDetailDto';
 import { CarImageService } from 'src/app/services/car-image.service';
@@ -36,6 +36,8 @@ export class CarImageComponent implements OnInit {
   rentalAddForm: FormGroup;
   rentalDto: RentalsDto[];
   disabledDateList:any[];
+  dateRange:any[];
+  dailyPrice: any;
 
   constructor(
     private carImageService: CarImageService,
@@ -44,11 +46,12 @@ export class CarImageComponent implements OnInit {
     private httpClient: HttpClient,
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
-    private rentalService: RentalService
+    private rentalService: RentalService,
+    private router: Router
   ) {
     this.datePickerConfig = Object.assign( {}, 
       {
-        containerClass:'theme-orange', 
+        containerClass:'theme-default',
         showWeekNumbers:false,
         minDate:new Date(2021,0,1),
         rangeInputFormat: 'DD-MM-YYYY',
@@ -71,28 +74,60 @@ export class CarImageComponent implements OnInit {
     });
 
     this.disabledDateList = [
-      new Date('2021-03-31'),
-      new Date('2021-04-05')
+
     ];
   }
 
+  getDisabledDates(carId:number){
+    //ulen ne ugrastım seninle be teh...
+    this.rentalService.getDisabledDates(carId).subscribe((response:any[]) => {
+      if (response.length > 0) {
+        for (let i = 0; i < response.length; i++) {
+          this.disabledDateList.push(new Date (response[i].toString()))
+        }
+      }
+    })
+  }
+
   checkRentAvailability(){
-    console.log("test")
-    let rentalModel = Object.assign({},this.rentalAddForm.value);
-    console.log(this.rentalAddForm.value)
-    console.log(this.rentalAddForm.get("dateRange").value)
+    let rentalModel = Object.assign({
+      "rentDate":this.rentalAddForm.get('dateRange').value[0],
+      "returnDate":this.rentalAddForm.get('dateRange').value[1]
+    },this.rentalAddForm.value);
     this.rentalService.checkRentAvailability(rentalModel).subscribe(response => {
-      console.log(response)
+      if (response.success) {
+        this.rentable=true;
+        this.toastrService.success(response.message, "Available")
+      }
+    },responseError =>{
+      this.toastrService.error(responseError.error.message, "NOT Available")
     })
   }
 
   createRentAddForm(){
     this.rentalAddForm = this.formBuilder.group({
       carId: [this.carId, Validators.required],
-      //customerId: ['', Validators.required],
-      dateRange: ['', Validators.required],
+      customerId: [1, Validators.required],
+      dateRange:['', Validators.required],
       daiylPrice: [1, Validators.required]
     })
+    console.log(this.rentalAddForm.value)
+  }
+
+  rentRequest(rtype:string, price2:any){
+    let naviExtras : NavigationExtras={
+      queryParams: {
+        "rentDate": this.rentalAddForm.get('dateRange').value[0],
+        "returnDate": this.rentalAddForm.get('dateRange').value[1],
+        "carId": this.carId,
+        "dailyPrice" : this.dailyPrice,
+        "customerId": this.rentalAddForm.get('customerId').value,
+        "dp2": price2,
+        "rentType": rtype
+      }
+    };
+    this.router.navigate(['/rentals/'+this.carId+'/'+rtype+'/'+this.rentalAddForm.get('customerId').value], naviExtras)
+    this.toastrService.success("Start Rental","RENT")
   }
 
   getImagesForSlider(carImages: CarImage[]) {
@@ -162,20 +197,8 @@ export class CarImageComponent implements OnInit {
   getCarDetailsById(carId: number) {
     this.carService.getCarDetailsByCarId(carId).subscribe((response) => {
       this.carDetails = response.data;
+      this.dailyPrice = response.data.filter(x=>x.dailyPrice)
       this.dataLoaded = true;
     });
-  }
-
-  rentRequest(){
-    this.toastrService.success("Start Rental","RENT")
-  }
-
-  getDisabledDates(carId:number){
-    //ulen ne ugrastım seninle be teh...
-    this.rentalService.getDisabledDates(carId).subscribe((response:any[]) => {
-      for (let i = 0; i < response.length; i++) {
-        this.disabledDateList.push(new Date (response[i].toString()))
-      }
-    })
   }
 }

@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'colors/update/:colorId', component: ColorUpdateComponent },
 
   { path: 'rentals', component: RentalComponent },
-  { path: 'rental/:rentCarId/:rentType', component: RentRequestComponent },
+  { path: 'rentals/:rentCarId/:rentType/:customerId', component: RentRequestComponent },
 
 ];
 

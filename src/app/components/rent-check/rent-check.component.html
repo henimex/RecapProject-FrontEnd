@@ -1,0 +1,29 @@
+<p>PreCheck For Rentablity</p>
+
+<div class="pricing-header text-center">
+    <div class="card mb-4 shadow p-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="display-8">Check Availability</h3>
+                <div class="card-body">
+                    <form [formGroup]="rentalAddForm" (ngSubmit)="checkRentAvailability()" autocomplete="off">
+                        <div class="row">
+                            <div class="form-group col-md-5">
+                                <label for="dateRange">Start Date</label>
+                                <input type="text" bsDaterangepicker [bsConfig]="datePickerConfig"
+                                    [datesDisabled]="disabledDateList" class="form-control" id="dateRange"
+                                    formControlName="dateRange" #dateRange>
+                                <button type="submit" class="btn btn-dark px-5 fb-bold">
+                                    <i class="bi-plus-square me-1"></i>Check Status
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label *ngIf="rentable === true" for="result"> Car Is Rentable</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

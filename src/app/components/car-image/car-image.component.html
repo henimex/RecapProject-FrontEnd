@@ -9,25 +9,23 @@
   </div>
 
   <div class="pricing-header text-center">
-    <div class="card mb-4 shadow p-3">
+    <div class="card mb-4 shadow p-3" >
       <div class="card">
         <div class="card-header">
           <h3 class="display-8">Check Availability</h3>
           <div class="card-body">
-            <form [formGroup]="rentalAddForm" (ngSubmit)="checkRentAvailability()">
+            <form [formGroup]="rentalAddForm" (ngSubmit)="checkRentAvailability()" autocomplete="off">
               <div class="row">
-                <div class="form-group col-md-5">
+                <div class="form-group">
                   <label for="dateRange">Start Date</label>
                   <input type="text" bsDaterangepicker [bsConfig]="datePickerConfig" [datesDisabled]="disabledDateList"  class="form-control" id="dateRange" formControlName="dateRange" #dateRange>
-                  <div class="form-group col-md-5">
                     <button type="submit" class="btn btn-dark px-5 fb-bold">
                       <i class="bi-plus-square me-1"></i>Check Status
                     </button>
                   </div>
                 </div>
-              </div>
               <div>
-                <label *ngIf=[rentable] for="result"> Car Is Rentable</label>
+                <label *ngIf="rentable === true" for="result">//TODO:: ALERT</label>
               </div>
             </form>
           </div>
@@ -35,8 +33,6 @@
       </div>
     </div>
   </div>
-
-
 
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     <div class="col">
@@ -51,7 +47,7 @@
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button *ngIf="rentable === true"  type="button" class="w-100 btn btn-dark" (click)="rentRequest()" routerLink="/rental/{{carDto.carId}}/s">Create Rent Request</button>
+        <button *ngIf="rentable === true"  type="button" class="w-100 btn btn-dark" (click)="rentRequest('s',10)" routerLink="/rentals/{{carDto.carId}}/s/1">Create Rent Request</button>
       </div>
     </div>
     </div>
@@ -67,7 +63,7 @@
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-warning" (click)="rentRequest()" routerLink="/rental/{{carDto.carId}}/t">Create Rent Request</button>
+        <button *ngIf="rentable === true" type="button" class="w-100 btn btn-warning" (click)="rentRequest('t',20)" routerLink="/rentals/{{carDto.carId}}/t">Create Rent Request</button>
       </div>
     </div>
     </div>
@@ -83,7 +79,7 @@
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
         </ul>
-        <button type="button" class="w-100 btn btn-warning" (click)="rentRequest()" routerLink="/rental/{{carDto.carId}}/v">Create Rent Request</button>
+        <button *ngIf="rentable === true" type="button" class="w-100 btn btn-warning" (click)="rentRequest('v', 30)" routerLink="/rentals/{{carDto.carId}}/v">Create Rent Request</button>
       </div>
     </div>
     </div>
