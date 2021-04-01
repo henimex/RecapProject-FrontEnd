@@ -37,7 +37,12 @@ export class RentalService {
   }
 
   getDisabledDates(carId: number): Observable<DisabledDates[]> {
-    let newPath = this.apiUrl + 'get-dis-days?carId=' + carId
+    let newPath = this.apiUrl + 'get-dis-days?carId=' + carId;
     return this.httpClient.get<DisabledDates[]>(newPath);
+  }
+
+  addRental(rental: Rental): Observable<ResponseModelBase>{
+    let newPath = this.apiUrl + 'add';
+    return this.httpClient.post<ResponseModelBase>(newPath, rental);
   }
 }

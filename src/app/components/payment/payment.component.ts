@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentService } from 'src/app/services/payment.service';
+import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-payment',
@@ -10,12 +12,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PaymentComponent implements OnInit {
   paymentForm: FormGroup;
+  test:any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private paymentService: PaymentService,
+    private rentalService: RentalService
   ) {}
 
   ngOnInit(): void {
@@ -23,13 +28,13 @@ export class PaymentComponent implements OnInit {
       console.log("PARAMS");
       console.log(params);
       this.paymentForm = this.formBuilder.group({
-        carId: [params['carId']],
-        customerId: [params['customerId']],
-        rentDate: [params['rentDate']],
-        returnDate: [params['returnDate']],
-        dailyPrice: [params['dailyPrice']],
-        daysForRent: [params['daysForRent']],
-        totalPrice: [params['totalPrice']],
+        carId: ([parseInt(params['carId'])]),
+        customerId: [parseInt(params['customerId'])],
+        rentDate: [new Date(params['rentDate'])],
+        returnDate: [new Date(params['returnDate'])],
+        dailyPrice: [parseInt(params['dailyPrice'])],
+        daysForRent: [parseInt(params['daysForRent'])],
+        totalPrice: [parseInt(params['totalPrice'])],
         cardHolderName: ['', Validators.required],
         cardNumber: ['', Validators.required],
         validM: ['', Validators.required],
@@ -42,5 +47,23 @@ export class PaymentComponent implements OnInit {
     console.log(this.paymentForm.value)
   }
 
+  makePayment(){
+    let paymentModel = Object.assign({},this.paymentForm.value);
+    this.paymentService.makePayment(paymentModel).subscribe(response=>{
+      this.toastrService.info(response.message, "Payment Transaction Information")
+    })
+  }
+
+  makePaymentSolid(){
+    this.paymentService.makePaymentSolid(this.paymentForm);
+    this.addToRentals()
+  }
+
+  addToRentals(){
+    let rentModel = Object.assign({},this.paymentForm.value);
+    this.rentalService.addRental(rentModel).subscribe(response=>{
+      this.toastrService.info(response.message, "Rental Add Information")
+    })
+  }
 
 }

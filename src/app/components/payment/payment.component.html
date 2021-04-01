@@ -1,1 +1,96 @@
-<p>payment works!</p>
+<!-- Self Form Group -->
+
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4"
+                src="https://previews.123rf.com/images/deepbluero/deepbluero1708/deepbluero170801225/83417833-online-shopping-cars-conceptual-image-with-cars-in-shopping-cart.jpg"
+                alt="" width="375" height="250">
+            <h2>Hen Dev Rent A Car Payment Page</h2>
+            <p class="lead">Copmplate payment for start car delivery process</p>
+        </div>
+    </main>
+
+    <div class="row mx-md-n4" >
+        <div class="col-md-1 col-lg-11">
+            <div class="card">
+                <div class="card-header fw-bold"><h5 class="title">Payment Informations</h5></div>
+
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked
+                            required>
+                        <label class="form-check-label" for="credit">Credit card</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                        <label class="form-check-label" for="debit">Debit card</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                        <label class="form-check-label" for="paypal">PayPal</label>
+                    </div>
+                </div>
+                
+                <div class="card-bod">
+                    <form [formGroup]="paymentForm" autocomplete="off" (ngSubmit)="makePaymentSolid()">
+                        <div class="form-group">
+                            <div class="my-3">
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                        <label for="carId" class="fw-bold" >Car ID</label>
+                                        <input type="number" readonly="readonly" class="form-control" placeholder="Car Id" id="carId" formControlName="carId"  >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customerId" class="fw-bold" >Customer Id</label>
+                                        <input type="number" readonly="readonly" class="form-control" placeholder="Customer Id" id="customerId" formControlName="customerId"  >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="dailyPrice" class="fw-bold" >Daily Price</label>
+                                        <input type="number" readonly="readonly" class="form-control" placeholder="Daily Price" id="dailyPrice" formControlName="dailyPrice"  >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="daysForRent" class="fw-bold" >Days For Rent</label>
+                                        <input type="n umber" readonly="readonly" class="form-control" placeholder="Days For Rent" id="daysForRent" formControlName="daysForRent"  >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="totalPrice" class="fw-bold" >Total Price</label>
+                                        <input type="number" readonly="readonly" class="form-control" placeholder="Total Price" id="totalPrice" formControlName="totalPrice" #totalPrice >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <hr class="my-4">
+                                        <label for="cardHolderName" class="fw-bold" >Car Owner Name Surname</label>
+                                        <input type="text" class="form-control" placeholder="Card Owner Name" id="cardHolderName" formControlName="cardHolderName"  >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <hr class="my-4">
+                                        <label for="cardNumber" class="fw-bold" >Card Number</label>
+                                        <input type="number"  class="form-control" placeholder="Card Number" id="cardNumber" formControlName="cardNumber"  >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="validM" class="fw-bold" >Exp Month</label>
+                                        <input type="number" class="form-control" placeholder="Exp Month" id="validM" formControlName="validM"  >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="validY" class="fw-bold" >Exp Year</label>
+                                        <input type="number" class="form-control" placeholder="Exp Year" id="validY" formControlName="validY" >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="cvc" class="fw-bold" >CVC</label>
+                                        <input type="number" class="form-control" placeholder="CVC" id="cvc" formControlName="cvc" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="text-end">
+                            <button class="w-100 btn btn-success btn-lg" type="submit">Make Payment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

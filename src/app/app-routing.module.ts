@@ -9,6 +9,7 @@ import { ColorAddComponent } from './components/color/color-add/color-add.compon
 import { ColorUpdateComponent } from './components/color/color-update/color-update.component';
 
 import { ColorComponent } from './components/color/color.component';
+import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
 import { RentalComponent } from './components/rental/rental.component';
@@ -40,6 +41,8 @@ const routes: Routes = [
   { path: 'rentals/:rentCarId/:rentType/:customerId', component: RentRequestComponent },
   
   { path: 'payments', component: PaymentComponent },
+  
+  { path: 'login', component: LoginComponent },
 
 ];
 
