@@ -32,6 +32,7 @@ import { CustomerUpdateComponent } from './components/customer/customer-update/c
 import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { RentCheckComponent } from './components/rent-check/rent-check.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RentCheckComponent } from './components/rent-check/rent-check.component
     ColorUpdateComponent,
     CustomerUpdateComponent,
     ColorFilterPipePipe,
-    RentCheckComponent
+    RentCheckComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

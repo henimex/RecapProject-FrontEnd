@@ -1,3 +1,62 @@
-rental works
+<div class="row mt-4">
+    <div class="col-log-9">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <i class="bi-plus-square me-1"></i><h3>Rent Form</h3> 
+            </div>
+            <div class="cord-body">
+                <form autocomplate="off" [formGroup]="rentForm" (ngSubmit)="rentIt()">
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="carId" placeHolder="Car Id" formControlName="carId" readonly="readonly">
+                        <label for="carId">Car Id</label>
+                    </div>
 
-  
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="rentDate" placeHolder="Rent Date" formControlName="rentDate" readonly="readonly">
+                        <label for="rentDate">Rent Date</label>
+                    </div>
+
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="returnDate" placeHolder="Return Date" formControlName="returnDate" readonly="readonly">
+                        <label for="returnDate">Return Date</label>
+                    </div>
+
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="customerId" placeHolder="Customer Id" formControlName="customerId" readonly="readonly">
+                        <label for="customerId">Customer Id</label>
+                    </div>
+
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="daysForRent" placeHolder="Total Days For Rent" formControlName="daysForRent" readonly="readonly">
+                        <label for="daysForRent">Days For Rent</label>
+                    </div>
+
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="dailyPrice" placeHolder="Daily Price" formControlName="dailyPrice" readonly="readonly">
+                        <label for="dailyPrice">Daily Price</label>
+                    </div>
+
+                    <div class="form-floating mb3">
+                        <input type="text" class="form-control" id="calculatedDailyPrice" placeHolder="Total Price" formControlName="calculatedDailyPrice" readonly="readonly">
+                        <label for="calculatedDailyPrice">Total Price</label>
+                    </div>
+
+                    <div id="agreement">
+                        <li>Rent Process will start after 12:00 AM </li> 
+                        <li>Car Should be Returned before 12:00 AM</li> 
+                        <li>Deliveries' after 12:00 AM will be hourly pricing</li> 
+                    </div>
+
+                    <div class="text-end">
+                        <button type="button" (click)="cancelRent()" class="btn btn-dark px-5 fw-bold">
+                            <i class="bi-plus-square me-1"></i>Cancel Form
+                        </button>
+                        <button type="submit" class="btn btn-success px-5 fw-bold">
+                            <i class="bi-plus-square me-1"></i>Agree >> Go Payment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

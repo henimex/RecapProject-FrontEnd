@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rent-request',
@@ -17,10 +18,13 @@ export class RentRequestComponent implements OnInit {
   daily2:number;
   rentType:string;
   calculatedDailyPrice:number;
+  daysForRent:number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,10 +35,12 @@ export class RentRequestComponent implements OnInit {
       this.dailyPrice=params['dailyPrice']
       this.customerId=params['customerId']
       this.daily2 = params['dp2']
-      this.rentType=params['rtype']
+      this.rentType=(params['rentType']).toString()
       console.log(params)
     });
+    console.log("rent type 1: " + this.rentType)
     this.calculateDailyPrice(this.rentDate,this.returnDate,this.daily2,this.rentType)
+    this.createRentForm();
   }
 
   createRentForm(): void {
@@ -43,36 +49,66 @@ export class RentRequestComponent implements OnInit {
       customerId:[this.customerId],
       rentDate:[this.rentDate],
       returnDate:[this.returnDate],
-      dailyPrice:[this.dailyPrice]
+      dailyPrice:[this.daily2 + ' TL'],
+      daysForRent:[this.daysForRent + ' Days'],
+      calculatedDailyPrice:[this.calculatedDailyPrice + ' TL'],
     })
   }
 
   createNaviParams(){
-
+    //TODO:: CreateMethod for ngOnInit Codes
   }
 
-  calculateDailyPrice(rentDate:Date,returnDate:Date,dailyPrice:number,rentType:string) {
+  calculateDailyPrice(rentDate:Date,returnDate:Date,dailyPrice:number,rentType:string):number {
     let rentD = new Date(rentDate)
     let returnD = new Date(returnDate)
-    
     let day = (returnD.getTime() - rentD.getTime()) / (1000 * 3600 * 24)
+    this.daysForRent = day
+    //TODO:: Disable
     console.log(day*dailyPrice)
     console.log((dailyPrice - ((dailyPrice * 10) / 100)) * day)
     console.log((dailyPrice - ((dailyPrice * 20) / 100)) * day)
 
-
-    if (rentType === 's') { this.calculatedDailyPrice = dailyPrice * day } 
-    else if (rentType ==='t' && day >= 30 ) { this.calculatedDailyPrice = (dailyPrice - ((dailyPrice * 10) / 100)) * day }
-    else if (rentType ==='v' && day >= 365 ){ this.calculatedDailyPrice = (dailyPrice - ((dailyPrice * 20) / 100)) * day }
-     else{
-      console.log("DailyPrice can not be calculated")
-
+    if (rentType === 't' && day >= 30) {
+      this.calculatedDailyPrice = (dailyPrice - (dailyPrice * 10) / 100) * day;
+      this.toastrService.success('For ' + day + ' days Travaller Packege Price : ' + this.calculatedDailyPrice + " TL", "Traveller (10% Discounted)");
+    } else if (rentType === 'v' && day >= 365) {
+      this.calculatedDailyPrice = (dailyPrice - (dailyPrice * 20) / 100) * day;
+      this.toastrService.success('For ' + day + ' days Voyager Packege Price : ' + this.calculatedDailyPrice + " TL", "Voyager (20% Discounted)");
+    } else if (rentType === 's' || rentType === 't' || rentType === 'v') {
+      this.calculatedDailyPrice = dailyPrice * day;
+      this.toastrService.success('For ' + day + ' days Suggested Packege Price : ' + this.calculatedDailyPrice + " TL", "Suggested (No Discount)");;
+    } else {
+      this.toastrService.error('DailyPrice can not be calculated check Form Informations', 'Calculation Failed');
     }
 
-    console.log("Rent Date : " + rentDate)
-    console.log("Return Date : " + returnDate)
-    console.log("Days Between : " + day)
+    //TODO:: Disable
+    // console.log("Rent Date : " + rentDate)
+    // console.log("Return Date : " + returnDate)
+    // console.log("Days Between : " + day)
+    console.log("Calculated Price : " + this.calculatedDailyPrice)
 
-    return 1
+    return this.calculatedDailyPrice
+  }
+
+  rentIt(){
+    console.log("Rent Intilize")
+    let naviExtras : NavigationExtras ={
+      queryParams: {
+        "rentDate":this.rentDate,
+        "returnDate":this.returnDate,
+        "carId":this.carId,
+        "customerId":this.customerId,
+        "daysForRent":this.daysForRent,
+        "dailyPrice":this.daily2,
+        "totalPrice":this.calculatedDailyPrice
+      }
+    };
+    this.router.navigate(['/payments'], naviExtras)
+    this.toastrService.success("Redirection to the Payment Page "," Payment Transaction")
+  }
+
+  cancelRent(){
+    console.log("Rent Cancel")
   }
 }
