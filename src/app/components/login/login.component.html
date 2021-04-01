@@ -1,0 +1,31 @@
+<body class="text-center">
+    <main class="form-signin">
+        <form [formGroup]="" (ngSubmit)="login()" >
+            <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
+                <label for="floatingInput">e-mail</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember Me
+                </label>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="w-100 btn btn-lg btn-primary">Register</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="w-100 btn btn-lg btn-success" type="submit" >Log In</button>
+                </div>
+            </div>
+            <p class="mt-5 mb-3 text-muted">&copy; 2021 HenDev</p>
+        </form>
+    </main>
+</body>
