@@ -13,7 +13,10 @@ import { SingleResponseModel } from '../models/ResponseModels/singleResponseMode
 })
 export class BrandService {
   apiUrl = 'https://localhost:44327/api/';
-  constructor(private httpClient: HttpClient, private toastrService: ToastrService) {}
+  constructor(
+    private httpClient: HttpClient, 
+    private toastrService: ToastrService
+    ) {}
 
   getBrands(): Observable<ListResponseModel<Brand>> {
     let newPath = this.apiUrl + 'brands/get-all';

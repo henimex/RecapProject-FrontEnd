@@ -1,7 +1,7 @@
 <body class="text-center">
     <main class="form-signin">
-        <form [formGroup]="" (ngSubmit)="login()" >
-            <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" >
+            <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
 
             <div class="form-floating">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button class="w-100 btn btn-lg btn-primary">Register</button>
+                    <button class="w-100 btn btn-lg btn-primary" (click)="register()">Register</button>
                 </div>
                 <div class="col-md-6">
                     <button class="w-100 btn btn-lg btn-success" type="submit" >Log In</button>
