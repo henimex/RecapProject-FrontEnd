@@ -44,6 +44,5 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.toastrService.warning('Register Saayfasına Yonlendir.');
-    
   }
 }

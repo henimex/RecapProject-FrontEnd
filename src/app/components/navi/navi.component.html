@@ -28,14 +28,13 @@
             <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Admin Panel</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login/">Login</a>
+            <a class="nav-link" routerLink="/login/" *ngIf="!loggedIn">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login/">Register</a>
+            <a class="nav-link"  *ngIf="loggedIn">Welcome {{userFirstName}} {{userLastName}}</a>
           </li>
         </ul>
         <form class="d-flex">
-
         </form>
       </div>
     </div>
