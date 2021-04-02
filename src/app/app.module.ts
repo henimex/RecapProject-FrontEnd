@@ -10,7 +10,7 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { DiscountPipe } from './pipes/discount.pipe';
@@ -34,6 +34,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { RentCheckComponent } from './components/rent-check/rent-check.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,9 @@ import { LoginComponent } from './components/login/login.component';
       
     }),
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

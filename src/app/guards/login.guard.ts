@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class LoginGuard implements CanActivate {
 
   constructor(
-    //private authService:AuthService, 
+    private authService:AuthService, 
     private toastrService: ToastrService, 
     private router:Router){}
 
@@ -17,7 +18,13 @@ export class LoginGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    
+      if (this.authService.isAuthenticated()) {
+        return true;
+      }else{
+        this.router.navigate(['login'])
+        this.toastrService.warning("You Must Login Before Continue","LOGIN REQUIRED")
+        return false;
+      }
   }
-  
 }
