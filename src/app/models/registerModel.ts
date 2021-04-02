@@ -1,5 +1,8 @@
-export interface RegisterModel{
-    id:number;
-    username:string;
-    campanyName:string;
+import { TokenModel } from "./tokenModel";
+
+export interface RegisterModel extends TokenModel {
+    email:string;
+    password:string;
+    firstName:string;
+    lastName:string;
 }

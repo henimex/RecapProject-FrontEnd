@@ -11,6 +11,7 @@ import { ColorUpdateComponent } from './components/color/color-update/color-upda
 import { ColorComponent } from './components/color/color.component';
 import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { RegisterComponent } from './components/register/register.component';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { LoginGuard } from './guards/login.guard';
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'payments', component: PaymentComponent },
   
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 
 ];
 

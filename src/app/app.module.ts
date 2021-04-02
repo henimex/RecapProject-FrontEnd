@@ -35,6 +35,7 @@ import { RentCheckComponent } from './components/rent-check/rent-check.component
 import { PaymentComponent } from './components/payment/payment.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ColorFilterPipePipe,
     RentCheckComponent,
     PaymentComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
