@@ -92,7 +92,6 @@ export class RentRequestComponent implements OnInit {
   }
 
   rentIt(){
-    console.log("Rent Intilize")
     let naviExtras : NavigationExtras ={
       queryParams: {
         "rentDate":this.rentDate,

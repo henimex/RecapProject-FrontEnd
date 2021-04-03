@@ -31,6 +31,9 @@
             <a class="nav-link" routerLink="/login/" *ngIf="!loggedIn">Login</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" (click)="logout()" *ngIf="loggedIn">Log Out</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link"  *ngIf="loggedIn">Welcome {{userFirstName}} {{userLastName}}</a>
           </li>
         </ul>

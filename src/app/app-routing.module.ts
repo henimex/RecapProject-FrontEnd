@@ -10,6 +10,7 @@ import { ColorUpdateComponent } from './components/color/color-update/color-upda
 
 import { ColorComponent } from './components/color/color.component';
 import { LoginComponent } from './components/login/login.component';
+import { NaviComponent } from './components/navi/navi.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentRequestComponent } from './components/rent-request/rent-request.component';
@@ -46,6 +47,8 @@ const routes: Routes = [
   
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  
+  { path: 'navibar', component: NaviComponent },
 
 ];
 

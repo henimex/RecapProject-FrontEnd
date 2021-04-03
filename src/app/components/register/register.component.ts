@@ -43,8 +43,7 @@ export class RegisterComponent implements OnInit {
         if (response.success) {
           this.toastrService.success(response.message,'Register Information')
           localStorage.setItem('token', response.data.token)
-          //this.location.back()
-          this.router.navigate(['/cars'])
+          this.router.navigate(['/']).then(() => {window.location.reload();})
         }
       },responseError=>{
         this.toastrService.error(responseError.error.message, 'Register Information')

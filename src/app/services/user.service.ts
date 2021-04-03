@@ -15,9 +15,9 @@ export class UserService {
     private toastrService: ToastrService
   ) {}
 
-  getUserInformation(mail: string): Observable<SingleResponseModel<User>> {
-    let newPath = this.apiUrl + 'users/get-by-mail?email=' + mail;
-    return this.httpClient.get<SingleResponseModel<User>>(newPath)
+  getUserInformation(user: User): Observable<SingleResponseModel<User>> {
+    let newPath = this.apiUrl + 'users/get-by-mail'
+    return this.httpClient.post<SingleResponseModel<User>>(newPath,user)
   }
 
   getUserById(id: number):Observable<SingleResponseModel<User>> {
