@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { UserCard } from 'src/app/models/userCard';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserCardService } from 'src/app/services/user-card.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,12 +18,14 @@ export class DashboardComponent implements OnInit {
   userFirstName: string;
   userLastName: string;
   userMail: string;
+  userCards:UserCard[];
 
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userCardService: UserCardService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +33,7 @@ export class DashboardComponent implements OnInit {
     if (this.loggedIn) {
       this.getUserInfo();
       this.createDashBoardForm();
+      //this.getUserCards(this.userDashboardForm.get('id').value)
     }
   }
   createDashBoardForm() {
@@ -52,6 +57,7 @@ export class DashboardComponent implements OnInit {
         paswordHash: [response.data.passwordHash, Validators.required],
         paswordSalt: [response.data.passwordSalt, Validators.required]
       })
+      this.getUserCards(response.data.id)
     });
   }
 
@@ -76,4 +82,11 @@ export class DashboardComponent implements OnInit {
       'In Progress'
     );
   }
+
+  getUserCards(userId:number){
+    this.userCardService.getUserCards(userId).subscribe(response => {
+      this.userCards=response.data;
+    })
+  }
+
 }

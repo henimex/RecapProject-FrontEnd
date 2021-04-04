@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'cars/filter/:filterColor/:filterBrand', component: CarComponent },
   
   { path: 'images', component: CarImageComponent },
-  { path: 'images/car/:carId', component: CarImageComponent, canActivate:[LoginGuard] },
+  { path: 'images/car/:carId/:customerId', component: CarImageComponent, canActivate:[LoginGuard] },
   { path: 'carImages', component: CarImageComponent },
 
   { path: 'brands', component: BrandComponent },

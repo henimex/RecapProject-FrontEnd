@@ -6,10 +6,12 @@ import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { Color } from 'src/app/models/color';
 import { CarDetailsDto } from 'src/app/models/Dto/carDetailDto';
+import { User } from 'src/app/models/user';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-car',
@@ -26,12 +28,15 @@ export class CarComponent implements OnInit {
   filterTextColor='';
   filterTextBrand='';
   dataLoaded = false;
+  user:User;
+  customerId:any;
 
   constructor(
     private carService: CarService,
     private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +55,29 @@ export class CarComponent implements OnInit {
       } else {
         console.log("car component init cond 4");
         this.getCarDetails();
+        this.getUserInfo()
       }
+    });
+    
+  }
+
+  getUserInfo() {
+    let loggedUserMail = localStorage.getItem('hd_rc_u_mail');
+    let infoModel = Object.assign({ email: loggedUserMail });
+    this.userService.getUserInformation(infoModel).subscribe((response) => {
+      // this.user.id = response.data.id;
+      this.user = response.data
+      this.customerId = response.data.id
+     // console.log(this.user)
+      // this.userDashboardForm = this.formBuilder.group({
+      //   id: [response.data.id, Validators.required],
+      //   firstName: [response.data.firstName, Validators.required],
+      //   lastName: [response.data.lastName, Validators.required],
+      //   email: [response.data.email, Validators.required],
+      //   paswordHash: [response.data.passwordHash, Validators.required],
+      //   paswordSalt: [response.data.passwordSalt, Validators.required]
+      // })
+      // this.getUserCards(response.data.id)
     });
   }
 

@@ -10,9 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RentalService } from 'src/app/services/rental.service';
 import { RentalsDto } from 'src/app/models/Dto/rentalsDto';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-
-
-
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-car-image',
@@ -41,6 +40,7 @@ export class CarImageComponent implements OnInit {
   userFindexPoint:number;
   findexRequest:boolean=false;
   rentProcess:boolean=false;
+  customerId:number;
 
   constructor(
     private carImageService: CarImageService,
@@ -50,7 +50,8 @@ export class CarImageComponent implements OnInit {
     private toastrService: ToastrService,
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
-    private router: Router
+    private router: Router,
+
   ) {
     this.datePickerConfig = Object.assign( {}, 
       {
@@ -69,6 +70,7 @@ export class CarImageComponent implements OnInit {
         this.getCarDetailsById(params['carId']);
         this.getDisabledDates(params['carId'])
         this.carId = parseInt(params['carId']);
+        this.customerId = parseInt(params['customerId']);
         this.createRentAddForm()
       } else {
         console.log('New Method Should be Iplemented');
@@ -111,14 +113,14 @@ export class CarImageComponent implements OnInit {
   createRentAddForm(){
     this.rentalAddForm = this.formBuilder.group({
       carId: [this.carId, Validators.required],
-      customerId: [1, Validators.required],
+      customerId: [this.customerId, Validators.required],
       dateRange:['', Validators.required],
       daiylPrice: [1, Validators.required]
     })
     console.log(this.rentalAddForm.value)
   }
 
-  rentRequest(rtype:string, price2:any){
+  rentRequest(rtype:string, price2:number){
     let naviExtras : NavigationExtras={
       queryParams: {
         "rentDate": this.rentalAddForm.get('dateRange').value[0],
@@ -169,7 +171,6 @@ export class CarImageComponent implements OnInit {
       this.getImagesForSlider(this.carImages);
       if (this.carImages[0].carId == 0) {
         this.defaultImgPath = this.carImages[0].imagePath;
-        console.log('Yesss');
       }
     });
   }

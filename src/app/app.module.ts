@@ -39,6 +39,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HelpComponent } from './components/help/help.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { HelpComponent } from './components/help/help.component';
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    AccordionModule.forRoot(),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({

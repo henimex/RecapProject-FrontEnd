@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserCard } from 'src/app/models/userCard';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { UserCardService } from 'src/app/services/user-card.service';
 
 @Component({
   selector: 'app-payment',
@@ -12,8 +14,11 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class PaymentComponent implements OnInit {
   paymentForm: FormGroup;
+  creditCardForm: FormGroup;
   test:any;
   saveCC:boolean = false;
+  userId:number;
+  userCards:UserCard[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -21,11 +26,13 @@ export class PaymentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private paymentService: PaymentService,
-    private rentalService: RentalService
+    private rentalService: RentalService,
+    private userCardService: UserCardService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
+      this.userId = parseInt(params['customerId'])
       console.log("PARAMS");
       console.log(params);
       this.paymentForm = this.formBuilder.group({
@@ -38,14 +45,17 @@ export class PaymentComponent implements OnInit {
         totalPrice: [parseInt(params['totalPrice'])],
         cardHolderName: ['', Validators.required],
         cardNumber: ['', Validators.required],
-        validM: ['', Validators.required],
-        validY: ['', Validators.required],
+        expMonth: ['', Validators.required],
+        expYear: ['', Validators.required],
         cvc: ['', Validators.required],
+        saveCreditCard:[''],
+        alias: ['']
       });
     });
 
     console.log("Form ")
     console.log(this.paymentForm.value)
+    this.getUserCards(this.userId);
   }
 
   makePayment(){
@@ -58,6 +68,7 @@ export class PaymentComponent implements OnInit {
   makePaymentSolid(){
     this.paymentService.makePaymentSolid(this.paymentForm);
     this.addToRentals()
+    this.saveCreditCard();
   }
 
   addToRentals(){
@@ -67,12 +78,38 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  selectedCard(){
-    console.log("test")
+  selectedCard(savedCardId:number){
+    this.userCardService.getUserSavedCard(savedCardId).subscribe(response=>{
+      console.log(response)
+      this.paymentForm = this.formBuilder.group({
+        cardHolderName: [response.data.cardHolderName],
+        cardNumber: [response.data.cardNumber],
+        expMonth: [response.data.expMonth],
+        expYear: [response.data.expYear],
+        cvc: [response.data.cvc],
+        alias: [response.data.alias]
+      })
+    })
   }
 
   checksavebox(){
     console.log(this.saveCC)
+  }
+
+  saveCreditCard(){
+    let ccinformationModel = Object.assign(
+      {
+        userId:this.userId
+      },this.paymentForm.value);
+    this.userCardService.saveUserCreditCard(ccinformationModel).subscribe(response =>{
+      this.toastrService.success(response.message,"Credit Card Save Information")
+    })
+  }
+
+  getUserCards(userId:number){
+    this.userCardService.getUserCards(userId).subscribe(response => {
+      this.userCards = response.data;
+    })
   }
 
 }

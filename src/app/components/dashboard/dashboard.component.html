@@ -33,6 +33,30 @@
                             <i class="bi-plus-square me-1"></i>Update Information
                         </button>
                     </div>
+                    <div>
+                        <accordion [isAnimated]="true">
+                            <accordion-group heading="Saved Credit Cards">
+                                <div class="container">
+                                    Saved Credit Cards
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <div *ngFor="let userCard of userCards" class="p-3 border bg-light"><strong> Alias :
+                                                    {{userCard.alias}}</strong>
+                                                <li>Name: : {{userCard.cardHolderName}}</li>
+                                                <li>CN: : {{userCard.cardNumber}}</li>
+                                                <li>Ex M: : {{userCard.expMonth}}</li>
+                                                <li>Ex Y: : {{userCard.expYear}}</li>
+                                                <li>CVC: : {{userCard.cvc}}</li>
+                                                <button class="btn btn-danger px-5 fw-bold">
+                                                    <i class="bi-plus-square me-1"></i>Delete Card
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
                 </form>
             </div>
         </div>
