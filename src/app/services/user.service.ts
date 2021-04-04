@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { ResponseModelBase } from '../models/ResponseModels/responseModelBase';
 import { SingleResponseModel } from '../models/ResponseModels/singleResponseModel';
 import { User } from '../models/user';
 
@@ -24,4 +25,10 @@ export class UserService {
     let newPath = this.apiUrl + 'users/get-by-id?id=' + id;
     return this.httpClient.get<SingleResponseModel<User>>(newPath)
   }
+
+  updateUserInformation(user: User): Observable<ResponseModelBase> {
+    let newPath = this.apiUrl + 'users/update'
+    return this.httpClient.post<ResponseModelBase>(newPath,user)
+  }
+
 }

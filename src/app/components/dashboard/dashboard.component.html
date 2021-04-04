@@ -1,1 +1,47 @@
 <p>dashboard works!</p>
+<div class="row mt-4">
+    <div class="col-log-9">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <i class="bi-plus-square me-1"></i>User Information
+            </div>
+            <div class="card-body">
+                <form autocomplate="off" [formGroup]="userDashboardForm" (ngSubmit)="updateUserInformation()">
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="id" placeholder="Id" formControlName="id" readonly="readonly">
+                        <label for="id">User Id</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name" formControlName="firstName">
+                        <label for="firstName">First Name</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" formControlName="lastName">
+                        <label for="lastName">Last Name</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="email" placeholder="E-Mail" formControlName="email" readonly="readonly">
+                        <label for="email">Email Adress</label>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-dark px-5 fw-bold">
+                            <i class="bi-plus-square me-1"></i>Update Information
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="d-grid">
+            <button class="btn btn-warning" (click)="holdAccount()">
+                <i class="bi-list me-1">Hold Account</i>
+            </button>
+        </div>
+    </div>
+</div>

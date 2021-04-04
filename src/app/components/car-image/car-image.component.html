@@ -5,12 +5,24 @@
       <h1 class="display-4">About {{carDto.modelYear}} {{carDto.brandName}}</h1>
       <p class="lead">{{ carDto.description }}</p>
       <p class="lead">Create your Rent Request and wait for a short time. Your application will be approved and the car delivery process will start immediately</p>
+      <!-- <p class="lead">Your Findex Point must be greater than <strong><h3>{{carDto.point}}</h3></strong>  for rent this car</p> -->
     </div>   
   </div>
 
   <div class="pricing-header text-center">
+    <div class="card mb-4 shadow p-3"> 
+      <h3 class="display-8">Findex Point Service</h3>
+      <p class="lead"><small>The rental process can only continue after querying your Findex Report.</small></p>
+      <p>Required Point <strong><h3>{{carDto.point}}</h3></strong> Your Point <strong><h3>{{userFindexPoint}}</h3></strong></p>
+      <button type="button" class="btn btn-dark px-5 fb-bold" [disabled]="findexRequest" (click)="checkFindexPoint(carDto); findexRequest = true">
+        <i class="bi-plus-square me-1"></i>Check Findex Point
+      </button>
+  </div>  
+</div>  
+
+  <div class="pricing-header text-center">
     <div class="card mb-4 shadow p-3" >
-      <div class="card">
+      <div *ngIf="rentProcess" class="card">
         <div class="card-header">
           <h3 class="display-8">Check Availability</h3>
           <div class="card-body">
@@ -19,7 +31,7 @@
                 <div class="form-group">
                   <label for="dateRange">Start Date</label>
                   <input type="text" bsDaterangepicker [bsConfig]="datePickerConfig" [datesDisabled]="disabledDateList"  class="form-control" id="dateRange" formControlName="dateRange" #dateRange>
-                    <button type="submit" class="btn btn-dark px-5 fb-bold">
+                    <button type="submit" class="btn btn-dark px-5 fb-bold" >
                       <i class="bi-plus-square me-1"></i>Check Status
                     </button>
                   </div>
@@ -46,6 +58,7 @@
           <li>Brand : {{ carDto.brandName }}</li>
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
+          <li>FPoint : {{ carDto.point }}</li>
         </ul>
         <button *ngIf="rentable === true"  type="button" class="w-100 btn btn-dark" (click)="rentRequest('s',10)" routerLink="/rentals/{{carDto.carId}}/s/1">Create Rent Request</button>
       </div>
@@ -62,6 +75,7 @@
           <li>Brand : {{ carDto.brandName }}</li>
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
+          <li>FPoint : {{ carDto.point }}</li>
         </ul>
         <button *ngIf="rentable === true" type="button" class="w-100 btn btn-warning" (click)="rentRequest('t',20)" routerLink="/rentals/{{carDto.carId}}/t">Create Rent Request</button>
       </div>
@@ -78,6 +92,7 @@
           <li>Brand : {{ carDto.brandName }}</li>
           <li>Color : {{ carDto.colorName }}</li>
           <li>Model : {{ carDto.modelYear }}</li>
+          <li>FPoint : {{ carDto.point }}</li>
         </ul>
         <button *ngIf="rentable === true" type="button" class="w-100 btn btn-warning" (click)="rentRequest('v', 30)" routerLink="/rentals/{{carDto.carId}}/v">Create Rent Request</button>
       </div>

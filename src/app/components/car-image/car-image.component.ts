@@ -38,6 +38,9 @@ export class CarImageComponent implements OnInit {
   disabledDateList:any[];
   dateRange:any[];
   dailyPrice: any;
+  userFindexPoint:number;
+  findexRequest:boolean=false;
+  rentProcess:boolean=false;
 
   constructor(
     private carImageService: CarImageService,
@@ -72,6 +75,7 @@ export class CarImageComponent implements OnInit {
         this.getImages();
       }
     });
+    
 
     this.disabledDateList = [
 
@@ -200,5 +204,17 @@ export class CarImageComponent implements OnInit {
       this.dailyPrice = response.data.filter(x=>x.dailyPrice)
       this.dataLoaded = true;
     });
+  }
+
+  checkFindexPoint(carDetail: CarDetailsDto){
+    let random = Math.floor(Math.random() * (1900-100+1)) + 100;
+    this.userFindexPoint = random;
+    if (carDetail.point < this.userFindexPoint) {
+      this.toastrService.success("Findex Point is Enough For Rent","Findex Report")
+      this.rentProcess = true;
+    } else {
+      this.toastrService.error("We are sorry You have not enough Findex point for rental process ","Findex Report")
+      this.rentProcess = false;
+    }
   }
 }

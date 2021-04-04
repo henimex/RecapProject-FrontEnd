@@ -85,8 +85,35 @@
                             </div>
                         </div>
                         <hr class="my-4">
-                        <div class="text-end">
+                        <div class="text-start">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" [(ngModel)]="saveCC">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  Save Credit Card Information
+                                </label>
+                              </div>
                             <button class="w-100 btn btn-success btn-lg" type="submit">Make Payment</button>
+                            <button class="w-100 btn btn-dark btn-lg" type="button" (click)="checksavebox()"> Check Button Status</button>
+
+
+                        </div>
+                        <div>
+                            <br>
+                            <div class="container">
+                                Saved Credit Cards
+                                <div class="row g-2">
+                                  <div class="col-6" (click)="selectedCard()">
+                                    <div class="p-3 border bg-light"><strong> Alias : FinansBank</strong>
+                                        <li>Name: : FERHAT OYGUR</li>
+                                        <li>CN: : 1234 **** **** 8965</li>
+                                        <li>Ex M: : 09</li>
+                                        <li>Ex Y: : 2025</li>
+                                        <li>CVC: : 124</li>
+                                     </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <br>
                         </div>
                     </form>
                 </div>
@@ -94,3 +121,4 @@
         </div>
     </div>
 </div>
+<br>

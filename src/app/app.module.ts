@@ -37,6 +37,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { HelpComponent } from './components/help/help.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     PaymentComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

@@ -1,44 +1,67 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/" >HenDev Rent a Car</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="">All Cars</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/rentals/">Rentals</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              About Us
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" >Contact Us</a></li>
-              <li><a class="dropdown-item" >Bank Accounts</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" >Social Media</a></li>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">HenDev Rent a Car</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="">All Cars</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/rentals/">Rentals</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            About Us
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item">Contact Us</a></li>
+            <li><a class="dropdown-item">Bank Accounts</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item">Social Media</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="divided"></a>
+          
+        </li>
+        <li class="nav-item">
+          <div class="btn-group" *ngIf="loggedIn" dropdown>
+            <button id="button-animated" dropdownToggle type="button"
+              class="btn btn-primary dropdown-toggle" aria-controls="dropdown-animated">
+              Welcome {{userFirstName}} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+              <li role="menuitem"><a class="dropdown-item" routerLink="/dashboard">Profile Page</a></li>
+              <li role="menuitem"><a class="dropdown-item" routerLink="/help">Help</a></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="divided"></a>
-            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Admin Panel</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login/" *ngIf="!loggedIn">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="logout()" *ngIf="loggedIn">Log Out</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  *ngIf="loggedIn">Welcome {{userFirstName}} {{userLastName}}</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-        </form>
-      </div>
+          </div>
+          <div class="btn-group" *ngIf="!loggedIn" dropdown>
+            <button id="button-animated" dropdownToggle type="button" 
+              class="btn btn-primary dropdown-toggle" aria-controls="dropdown-animated">
+              Login<span class="caret"></span>
+            </button>
+            <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu"aria-labelledby="button-animated">
+              <li role="menuitem"><a class="dropdown-item" routerLink="/login/" >Login</a></li>
+              <li role="menuitem"><a class="dropdown-item" routerLink="/register/" >Register</a></li>
+            </ul>
+          </div>
+          <button *ngIf="!loggedIn" id="button-animated" dropdownToggle type="button"
+             aria-controls="dropdown-animated">
+            Login <span class="caret"></span>
+          </button>
+          
+        </li>
+      </ul>
+      <form class="d-flex">
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>

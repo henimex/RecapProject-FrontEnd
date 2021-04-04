@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   userEmail: string;
   userStatus: boolean;
   
-
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
@@ -98,7 +97,7 @@ export class LoginComponent implements OnInit {
   }
 
   sendLoggedUserInfo(){
-    console.log('not working')
+    console.log('on hold.')
     let naviExtras : NavigationExtras = {
       queryParams:{
         'userId':this.userInfoForm.get('id').value,

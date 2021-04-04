@@ -13,6 +13,7 @@ import { RentalService } from 'src/app/services/rental.service';
 export class PaymentComponent implements OnInit {
   paymentForm: FormGroup;
   test:any;
+  saveCC:boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -64,6 +65,14 @@ export class PaymentComponent implements OnInit {
     this.rentalService.addRental(rentModel).subscribe(response=>{
       this.toastrService.info(response.message, "Rental Add Information")
     })
+  }
+
+  selectedCard(){
+    console.log("test")
+  }
+
+  checksavebox(){
+    console.log(this.saveCC)
   }
 
 }
