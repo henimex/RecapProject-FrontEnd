@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BankComponent } from './components/about/bank/bank.component';
+import { ContactComponent } from './components/about/contact/contact.component';
+import { SocialComponent } from './components/about/social/social.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
 import { BrandUpdateComponent } from './components/brand/brand-update/brand-update.component';
 import { BrandComponent } from './components/brand/brand.component';
+
 import { CarImageComponent } from './components/car-image/car-image.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { CarComponent } from './components/car/car.component';
 import { ColorAddComponent } from './components/color/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color/color-update/color-update.component';
@@ -23,6 +29,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
 
   { path: 'cars', component: CarComponent },
+  { path: 'cars/add', component: CarAddComponent },
   { path: 'cars/brand/:brandId', component: CarComponent },
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/:carId', component: CarComponent },
@@ -53,6 +60,13 @@ const routes: Routes = [
   { path: 'navibar', component: NaviComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'help', component: HelpComponent },
+  { path: 'bank', component: BankComponent },
+  { path: 'social', component: SocialComponent },
+  { path: 'contact', component: ContactComponent },
+  
+  { path: 'admin', component: AdminComponent },
+  
+
 
 ];
 

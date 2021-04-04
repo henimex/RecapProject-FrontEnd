@@ -3,7 +3,6 @@
   <span class="visually-hidden">Yükleniyor...</span>
 </div>
 
-
 <!-- Search Bar -->
 <!-- FilterText For Brand -->
 <div class="row shadow p-3">
@@ -36,7 +35,7 @@
         <img src="{{ carDto.imagePath }}" class="card-img-top"
           alt="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png" />
         <div class="card-body">
-          <h5 (click)="setCurrentCar(carDto)" routerLink="/images/car/{{ carDto.carId }}/{{customerId}}" class="card-title">
+          <h5 (click)="setCurrentCar(carDto)"  class="card-title">
             {{ carDto.brandName }}
           </h5>
 
@@ -46,46 +45,12 @@
             Description : {{ carDto.description }} <br />
             Point : {{ carDto.point }} <br />
           </p>
-
-          <a class="btn btn-success btn-sm">Rent {{ carDto.dailyPrice }} TL </a>
-          <a class="btn btn-danger btn-sm">Return Car</a>
-          <h5 *ngIf="currentCar">Seçtiniz. {{ currentCar.carId }}</h5>
+          
+          <div class="d-grid gap-3">
+            <a class="btn  btn-warning btn-sm" routerLink="/images/car/{{ carDto.carId }}/{{customerId}}">Car Details</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<div class="card mb-4 shadow p-3">
-  As A Table
-</div>
-
-<!-- Data Table -->
-<div class="card mb-4 shadow p-3">
-  <table *ngIf="dataLoaded == true" class="table table-hover table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Brand Name</th>
-        <th scope="col">Color Name</th>
-        <th scope="col">Model Year</th>
-        <th scope="col">Daily Price</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let carDto of carDetails | filterCarDetails: filterTextBrand: filterTextColor">
-        <th scope="row">{{ carDto.carId }}</th>
-        <td>{{ carDto.brandName }}</td>
-        <td>{{ carDto.colorName }}</td>
-        <td>{{ carDto.modelYear }}</td>
-        <td>{{ carDto.dailyPrice }}</td>
-        <td>{{ carDto.description }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- dropdown test -->
-
-<!-- Example single danger button -->

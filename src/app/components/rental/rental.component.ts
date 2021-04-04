@@ -11,7 +11,7 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalComponent implements OnInit {
   rentals: Rental[] = [];
   rentalDetails: RentalsDto[] = [];
-  dataLoaded: boolean = false;
+  dataLoaded: boolean = true;
   constructor(private rentalService: RentalService) {}
 
   ngOnInit(): void {
@@ -29,6 +29,7 @@ export class RentalComponent implements OnInit {
   getRentalDetails() {
     this.rentalService.getRentalDetails().subscribe((response) => {
       this.rentalDetails = response.data;
+      this.dataLoaded=true;
     });
   }
 }

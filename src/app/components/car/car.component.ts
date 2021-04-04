@@ -65,19 +65,8 @@ export class CarComponent implements OnInit {
     let loggedUserMail = localStorage.getItem('hd_rc_u_mail');
     let infoModel = Object.assign({ email: loggedUserMail });
     this.userService.getUserInformation(infoModel).subscribe((response) => {
-      // this.user.id = response.data.id;
       this.user = response.data
       this.customerId = response.data.id
-     // console.log(this.user)
-      // this.userDashboardForm = this.formBuilder.group({
-      //   id: [response.data.id, Validators.required],
-      //   firstName: [response.data.firstName, Validators.required],
-      //   lastName: [response.data.lastName, Validators.required],
-      //   email: [response.data.email, Validators.required],
-      //   paswordHash: [response.data.passwordHash, Validators.required],
-      //   paswordSalt: [response.data.passwordSalt, Validators.required]
-      // })
-      // this.getUserCards(response.data.id)
     });
   }
 

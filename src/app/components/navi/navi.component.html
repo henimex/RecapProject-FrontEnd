@@ -19,12 +19,12 @@
             About Us
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item">Contact Us</a></li>
-            <li><a class="dropdown-item">Bank Accounts</a></li>
+            <li><a class="dropdown-item" routerLink="/contact">Contact Us</a></li>
+            <li><a class="dropdown-item"routerLink="/bank">Bank Accounts</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item">Social Media</a></li>
+            <li><a class="dropdown-item" routerLink="/social">Social Media</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -39,6 +39,7 @@
             </button>
             <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
               <li role="menuitem"><a class="dropdown-item" routerLink="/dashboard">Profile Page</a></li>
+              <li role="menuitem"><a class="dropdown-item" routerLink="/admin">Admin</a></li>
               <li role="menuitem"><a class="dropdown-item" routerLink="/help">Help</a></li>
               <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a></li>
             </ul>

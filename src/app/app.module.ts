@@ -40,6 +40,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HelpComponent } from './components/help/help.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { AdminComponent } from './components/admin/admin.component';
+import { CarUpdateComponent } from './components/car/car-update/car-update.component';
+import { ContactComponent } from './components/about/contact/contact.component';
+import { SocialComponent } from './components/about/social/social.component';
+import { BankComponent } from './components/about/bank/bank.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +75,12 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    HelpComponent
+    HelpComponent,
+    AdminComponent,
+    CarUpdateComponent,
+    ContactComponent,
+    SocialComponent,
+    BankComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+<app-brand></app-brand>
+<app-color></app-color>
+<p></p>
+<!-- Data Table -->
+<div class="card mb-4 shadow p-3">
+    <table *ngIf="dataLoaded == true" class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Brand Name</th>
+                <th scope="col">Color Name</th>
+                <th scope="col">Model Year</th>
+                <th scope="col">Daily Price</th>
+                <th scope="col">Description</th>
+                <th class="text-end" scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let carDto of carDetails">
+                <th scope="row">{{ carDto.carId }}</th>
+                <td>{{ carDto.brandName }}</td>
+                <td>{{ carDto.colorName }}</td>
+                <td>{{ carDto.modelYear }}</td>
+                <td>{{ carDto.dailyPrice }}</td>
+                <td>{{ carDto.description }}</td>
+                <td class="text-end">
+                <button class="btn btn-sm btn-success px-2" routerLink="/cars/update/{{carDto.carId}}">
+                    <i class="bi-pencil me-1"></i>Update
+                </button>
+                <a>. .</a>
+                <button class="btn btn-sm btn-danger px-2" (click)="deleteCar(carDto)">
+                    <i class="bi-pencil me-1"></i>Delete
+                </button>
+                <a>. .</a>
+                <button class="btn btn-sm btn-warning px-2" (click)="deleteCar(carDto)">
+                    <i class="bi-pencil me-1"></i>Upload Image
+                </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
