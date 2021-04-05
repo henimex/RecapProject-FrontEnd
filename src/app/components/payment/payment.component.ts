@@ -68,7 +68,9 @@ export class PaymentComponent implements OnInit {
   makePaymentSolid(){
     this.paymentService.makePaymentSolid(this.paymentForm);
     this.addToRentals()
-    this.saveCreditCard();
+    if (this.saveCC) {
+      this.saveCreditCard();  
+    }
   }
 
   addToRentals(){
